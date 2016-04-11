@@ -1825,3 +1825,7 @@ form.pmpro_form label {
 .entry .entry-content table {
 	border:0px !important; 
 }
+
+.entry.about-team .entry-data {
+    width: 96% !important;
+}
