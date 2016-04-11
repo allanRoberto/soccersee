@@ -1,0 +1,67 @@
+@import "variables.less";
+
+.loop-pagination() {
+    display: block;
+    a:hover {
+        color: @brand-color;
+    }
+    span.current, span.dots, a {
+        display: inline-block;
+        margin: 0;
+        padding: 7px 14px;
+        background: @black;
+        color: @white-lighter;
+        text-align: center;
+        text-decoration: none;
+        font-size: @font-size-base - 1px;
+        font-weight: 500;
+        margin-right: 15px;
+        &.current, &:hover {
+            background-color: @brand-color;
+            color: @black;
+        }
+        &.prev, &.next {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: @font-size-small + 1px;
+            padding: 7px 25px;
+            vertical-align: top;
+            i {
+                color: @brand-color;
+            }
+            &:hover {
+                i {
+                    color: @white-lighter;
+                }                    
+            }
+        }
+        &.prev {
+            span {
+                margin-left: 10px;
+            }
+        }
+        &.next {
+            float: right;
+            margin-right: 0;
+            span {
+                margin-right: 10px;
+            }
+        }
+        i {
+            font-family: FontAwesome;
+            &.prev::before {
+                content: "\f104";
+            }
+            &.next::before {
+                content: "\f105";
+            }
+        }
+    }    
+}
+
+nav.paging-navigation {
+    margin-top: 30px;
+    .loop-pagination {
+        .loop-pagination();
+    }
+}
