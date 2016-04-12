@@ -1829,3 +1829,28 @@ form.pmpro_form label {
 .entry.about-team .entry-data {
     width: 96% !important;
 }
+
+.trainers .owl-nav {
+    top: auto !important;
+    right: 0px !important;
+    left: auto; 
+}
+
+.carousel-wrapper.trainers {
+    margin-top: 205px !important;
+}
+.entry.gallery-title .entry-data .entry-content {
+    padding-top: 21px !important;
+    margin-left: 270px !important;
+}
+
+.entry.gallery-title .entry-data .entry-content p:last-child {
+    margin-bottom: 0;
+    font-weight: 300 !important;
+    font-size: 12px !important;
+    letter-spacing: 1px !important;
+}
+
+.filters-wrapper .filters-header {
+    display: none;
+}
