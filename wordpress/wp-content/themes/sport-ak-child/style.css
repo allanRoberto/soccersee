@@ -1854,3 +1854,12 @@ form.pmpro_form label {
 .filters-wrapper .filters-header {
     display: none;
 }
+
+.panel.achievements .panel-content .entry:nth-child(4n+1) {
+    left: 18.91% !important;
+    top: 0;
+
+.panel.achievements .panel-content .entry:nth-child(4n+3) {
+    left: 52.87% !important;
+    top: 64.79% !important;
+}
