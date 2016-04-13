@@ -50,10 +50,18 @@ function umInsertUser(element) {
     bindElement.children(".pf_ajax_result").remove();
     arg = jQuery( element ).serialize();
     pfAjaxCall( bindElement, 'pf_ajax_request', arg, function(data) {
-        if (jQuery(data).attr('action_type') == 'registration')
+        if (jQuery(data).attr('action_type') == 'registration') {
             jQuery(element).replaceWith(data);
-        else
-            bindElement.append("<div class='pf_ajax_result'>"+data+"</div>");        
+
+            alert('test2');
+                var link_tab = $('li.vc_tta-tab a[href*="dados-especificos"]');
+
+                link_tab.trigger('click');
+          }      
+        else {
+             bindElement.append("<div class='pf_ajax_result'>"+data+"</div>");
+            }
+        
     });    
 }
 
