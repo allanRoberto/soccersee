@@ -1826,40 +1826,43 @@ form.pmpro_form label {
 	border:0px !important; 
 }
 
-.entry.about-team .entry-data {
-    width: 96% !important;
+.table-signature .vc_tta-panels-container {
+    border:0px !important;
 }
 
-.trainers .owl-nav {
-    top: auto !important;
-    right: 0px !important;
-    left: auto; 
+.table-signature .vc_tta-tabs-list {
+    background: #ccc;
+    height: 80px;
 }
 
-.carousel-wrapper.trainers {
-    margin-top: 205px !important;
-}
-.entry.gallery-title .entry-data .entry-content {
-    padding-top: 21px !important;
-    margin-left: 270px !important;
+.table-signature .vc_tta-tabs-list .vc_tta-tab {
+    width: 20%;
+    height: 80px;
 }
 
-.entry.gallery-title .entry-data .entry-content p:last-child {
-    margin-bottom: 0;
-    font-weight: 300 !important;
-    font-size: 12px !important;
-    letter-spacing: 1px !important;
+.table-signature .vc_tta-tabs-list .vc_tta-tab a {
+    height: 100%;
+    min-height: 100%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: 0px !important;
 }
 
-.filters-wrapper .filters-header {
-    display: none;
+.table-signature .vc_tta-tabs-list .vc_tta-tab a i.vc_tta-icon {
+    font-size: 59px;
+    right: 0;
+    color: rgba(0, 0, 0, 0.7);
 }
 
-.panel.achievements .panel-content .entry:nth-child(4n+1) {
-    left: 18.91% !important;
-    top: 0;
+.table-signature .vc_tta-container {
+    border:0px; 
+}
 
-.panel.achievements .panel-content .entry:nth-child(4n+3) {
-    left: 52.87% !important;
-    top: 64.79% !important;
+.form-dados-pessoais {
+    width: 55% !important;
+    margin:auto !important;
 }
