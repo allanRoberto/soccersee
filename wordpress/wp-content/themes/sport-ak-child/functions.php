@@ -18,6 +18,19 @@ function azexo_custom_scripts() {
     wp_enqueue_script('custom-js');
 }
 
+add_action( 'wp_ajax_load_checkout', 'load_checkout' );
+add_action( 'wp_ajax_nopriv_load_checkout', 'load_checkout' );
+
+
+function load_checkout() {
+	$id=20; 
+	$post = get_post($id); 
+	$content = apply_filters('the_content', $post->post_content); 
+	return $content; 
+	wp_die();
+}
+
+
 /* Please add your custom functions code below this line. */
 
 

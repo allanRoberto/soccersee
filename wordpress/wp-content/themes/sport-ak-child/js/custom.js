@@ -4,14 +4,22 @@
 	    	$('.next-step').click(function(){
 	    		e.preventDefault();
 	    	});
-	    	
-	    	$('#um_form_dadospessoais').submit(function() {
-	    		alert('test');
-	    		var link_tab = $('li.vc_tta-tab a[href*="dados-especificos"]');
 
-	    		link_tab.trigger('click');
+	    	var form_data = {};
+		    
+		    $('#sui_upload_image_form').find('input').each(function(){
+		        form_data[this.name] = $(this).val();
+		    });
 
-	    	});
-    	});
+		    $('#sui_upload_image_form').ajaxForm({
+		    	url: ajaxurl,
+		    	data: form_data,
+		    	type: 'POST',
+		    	contentType: 'multipart/form-data',
+		        success: function(response){
+		            alert(response);
+		        }
+		    });
+		});
     });
 })(jQuery);

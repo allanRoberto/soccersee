@@ -53,10 +53,17 @@ function umInsertUser(element) {
         if (jQuery(data).attr('action_type') == 'registration') {
             jQuery(element).replaceWith(data);
 
-            alert('test2');
-                var link_tab = $('li.vc_tta-tab a[href*="dados-especificos"]');
+                var data_request = {
+                'action': 'load_checkout',
+                'plan': 1
+            };
 
-                link_tab.trigger('click');
+            // since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
+            jQuery.post(ajaxurl, data_request, function(response) {
+                alert('Got this from theee server: ' + response);
+                jQuery('#checkout').append(response);
+            });
+          
           }      
         else {
              bindElement.append("<div class='pf_ajax_result'>"+data+"</div>");
