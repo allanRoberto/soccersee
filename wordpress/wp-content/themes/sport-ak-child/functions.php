@@ -18,11 +18,11 @@ function azexo_custom_scripts() {
     wp_enqueue_script('custom-js');
 }
 
-add_action( 'wp_ajax_load_checkout', 'load_checkout' );
-add_action( 'wp_ajax_nopriv_load_checkout', 'load_checkout' );
+add_action( 'wp_ajax_load_files', 'load_files' );
+add_action( 'wp_ajax_nopriv_load_files', 'load_files' );
 
 
-function load_checkout() {
+function load_files() {
 	$id=20; 
 	$post = get_post($id); 
 	$content = apply_filters('the_content', $post->post_content); 

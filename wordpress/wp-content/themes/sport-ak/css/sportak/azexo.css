@@ -1046,7 +1046,7 @@ del {
   font-weight: bold;
   color: #666666;
 }
-.site-content [type="submit"],
+
 .sidebar-container [type="submit"],
 .woocommerce [type="submit"],
 .search-wrapper [type="submit"] {

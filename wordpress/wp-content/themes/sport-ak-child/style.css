@@ -108,7 +108,6 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #333333;
   background-color: #ffffff;
 }
 input,
@@ -1077,9 +1076,9 @@ section.small .pricing-table {
     line-height: 1;
     background: #666;
     color: #fff;
-    margin-right: 30px;
     display: table;
     float: right;
+    border:0px;
 
 }
 .pricing-plan-active {
@@ -2696,7 +2695,7 @@ section.small .pricing-table {
     width: auto !important;
 }
 
-.site-content input[type="text"] {
+.site-content input[type="text"], .site-content input[type="password"], .site-content input[type="email"] {
 	float: left;
 	margin-bottom:10px !important;
 	margin-right: 5px !important; 
@@ -2768,7 +2767,7 @@ form.pmpro_form label {
 
 
 
-.site-content input[type="text"], .site-content textarea, .site-content select {
+.site-content input[type="text"], .site-content input[type="password"], .site-content input[type="email"], .site-content textarea, .site-content select {
     display: block;
     width: 100%;
     height: 39px;
@@ -2789,4 +2788,241 @@ form.pmpro_form label {
 }
 .site-content label {
     font-family: "Lato", sans-serif;
+}
+
+#signature-steps-menu {
+  width: 1170px;
+  margin: 40px auto 0px auto;
+}
+
+#signature-steps-menu ul {
+
+}
+
+#signature-steps-menu li {
+    float: left;
+    width: 17%;
+    margin: 0px 17px;
+}
+
+#signature-steps-menu li.current-menu-item a {
+  background: #fdbd00;
+}
+
+#signature-steps-menu li.current-menu-item a:before { 
+  border-color: #fdbd00 #fdbd00 #fdbd00 transparent;
+}
+
+#signature-steps-menu li.current-menu-item a:after {
+  border-left: 20px solid #fdbd00;
+}
+
+#signature-steps-menu li a {
+  width: 100%;
+  height: 40px;
+  display: block;
+  text-align: center;
+  background: #ddd;
+  padding: 34px 0;
+  line-height: 4px;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+#signature-steps-menu li a:before{
+  content: " ";
+    position: relative;
+    top: 50%;
+    margin-top: -34px;
+    border-width: 34px 0 34px 20px;
+    border-style: solid;
+    border-color: #ddd #ddd #ddd transparent;
+    float: left;
+    left: -20px;
+
+}
+
+#signature-steps-menu li a:after {
+  content: " ";
+    position: relative;
+    top: 50%;
+    margin-top: -34px;
+    border-top: 34px solid transparent;
+    border-bottom: 34px solid transparent;
+    border-left: 20px solid #ddd;
+    float: right;
+    right: -20px;
+}
+
+.entry .entry-content table tbody tr td {
+  border:0px !important;
+}
+
+#pmpro_pricing_fields, #pmpro_user_fields {
+  border: 1px solid #ddd !important;
+  width: 1170px;
+  margin:20px auto !important;
+}
+
+#pmpro_pricing_fields th, #pmpro_user_fields th {
+  padding: 15px !important;
+  border-bottom: 1px solid #ccc;
+}
+
+.pmpro_thead-msg a {
+      background:rgba(54, 53, 51, 0.9);
+    color: #fff;
+    padding: 16px;
+    top: 2px;
+    position: relative;
+    right: -15px;
+    text-decoration: none;
+}
+
+.signature-steps-navigation {
+  display: table;
+  margin: 10px auto 50px;
+}
+
+.pmpro_content_message {
+    width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    display: block;
+    border: 1px solid #ccc;
+  }
+
+  .pmpro_content_message a, .pmpro_content_message a:link {
+    background: rgba(54, 53, 51, 0.9);
+    padding: 20px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 16px;
+    margin: 20px auto 0;
+    display: block;
+  }
+
+#sui_upload_image_form{
+  width: 50%;
+  margin: 30px auto;
+}
+
+#user_images{
+  font-size:12px;
+}
+#user_images th{
+  text-align:left;
+}
+#user_images td{
+  vertical-align:middle;
+}
+#user_images td input{
+  margin:0px;
+}
+
+.msg-sucess-sui-form {
+      color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-align: center;
+    width: 49%;
+    margin: auto;
+    border: 1px solid;
+}
+
+#user_images {
+  display: table;
+    margin: 20px auto;
+    width: 50%;
+}
+ul.table-img {
+  width: 100%;
+  float: left;
+  list-style: none !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+ul.table-img li {
+  width: 48%;
+  float: left;
+  margin-right: 2%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+ul.table-img li img {
+  margin:auto;
+  display: table;
+}
+
+.description-img {
+  width: 100%;
+  height: 20px;
+  float: left;
+}
+
+.inline-flex {
+  display: inline-flex !important; 
+}
+.content-signature {
+  width: 1170px;
+  margin: auto;
+}
+
+.entry.subscribe-header .entry-data .entry-header .entry-title {
+  line-height: 2.8 !important;
+}
+
+.gallery-title .entry-content {
+  padding-top: 22px !important;
+}
+
+.entry.about-team .entry-data {
+  width: 89% !important;
+}
+
+.player-bio .panel.player-data {
+  width: 100% !important;
+  margin-top: 10px;
+}
+
+.player-bio .entry-title {
+  font-size: 27px;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.entry.azsc-player {
+  padding-top: 0px;
+}
+
+.player-club .panel.player-data .panel-content > div span {
+  font-family: "Lato", sans-serif;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.player-club .panel.player-data .panel-content > div span label {
+  margin-right: 10px !important;
+}
+
+.text-player {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 29px;
+}
+
+.player-club .panel.player-data .panel-content > div {
+    font-family: "Lato", sans-serif;
+    border:0px !important;
+    text-transform: none;
 }

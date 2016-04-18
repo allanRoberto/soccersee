@@ -58,16 +58,16 @@ if($pmpro_msg)
                     </section>
                     <footer class="pricing-plan-footer column-flush span-3">
                     	<?php if(empty($current_user->membership_level->ID)) { ?>
-								<a class="button btn-regular btn-regular pricing-button next-step"  data-vc-tabs="" data-vc-container=".vc_tta" href="#dados-pessoais" data-link="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Select', 'pmpro');?></a>
+								<a class="button btn-regular btn-regular pricing-button"  data-vc-tabs="" data-vc-container=".vc_tta" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Select', 'pmpro');?></a>
 							<?php } elseif ( !$current_level ) { ?>                	
-								<a class="button btn-regular btn-regular pricing-button next-step"  data-vc-tabs="" data-vc-container=".vc_tta" href="#dados-pessoais" data-link="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Select', 'pmpro');?></a>
+								<a class="button btn-regular btn-regular pricing-button"  data-vc-tabs="" data-vc-container=".vc_tta" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Select', 'pmpro');?></a>
 							<?php } elseif($current_level) { ?>      
 								
 								<?php
 									//if it's a one-time-payment level, offer a link to renew				
 									if( pmpro_isLevelExpiringSoon( $current_user->membership_level) && $current_user->membership_level->allow_signups ) {
 										?>
-											<a class="button btn-regular btn-regular pricing-button next-step"  data-vc-tabs="" data-vc-container=".vc_tta" href="#dados-pessoais" data-link="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Renew', 'pmpro');?></a>
+											<a class="button btn-regular btn-regular pricing-button"  data-vc-tabs="" data-vc-container=".vc_tta" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Renew', 'pmpro');?></a>
 										<?php
 									} else {
 										?>
