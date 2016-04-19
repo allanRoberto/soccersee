@@ -16,6 +16,8 @@ add_action('wp_enqueue_scripts', 'azexo_custom_scripts');
 function azexo_custom_scripts() {
     wp_register_script('custom-js', get_template_directory_uri() . '-child/js/custom.js', array('jquery'), AZEXO_THEME_VERSION, true);
     wp_enqueue_script('custom-js');
+    wp_register_script('masketinput-js', get_template_directory_uri() . '-child/js/jquery.maskedinput.min.js', array('jquery'), AZEXO_THEME_VERSION, true); 
+    wp_enqueue_script('masketinput-js');
 }
 
 add_action( 'wp_ajax_load_files', 'load_files' );
@@ -83,13 +85,13 @@ function user_search_form() {
 				<label for="date_of_birth_min_user">
 					Data de nascimento entre : 
 				</label>
-				<input type="text" value="" id="date_of_birth_user" name="date_of_birth_min_user"  />
+				<input type="text" value="" class="input-date" id="date_of_birth_user" name="date_of_birth_min_user"  />
 			</div>
 			<div class="col-lg-4">
 				<label for="date_of_birth_min_user">
 					Até : 
 				</label>
-				<input type="text" value="" id="date_of_birth_user" name="date_of_birth_max_user"  />
+				<input type="text" value="" class="input-date" id="date_of_birth_user" name="date_of_birth_max_user"  />
 			</div>
 		</div>
 		<div class="row">
