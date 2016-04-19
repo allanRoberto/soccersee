@@ -60,7 +60,7 @@ function search_user_shortcode() {
 function user_search_form() {
 
 	ob_start(); ?>
-	<form id="user_search_form" method="GET" action="">
+	<form id="user_search_form" method="GET" action="<?php echo get_permalink(1155); ?>">
 	<?php wp_nonce_field('user_search_form', 'user_search_form_submitted');?>
 		<div class="row">
 			<div class="col-lg-12">

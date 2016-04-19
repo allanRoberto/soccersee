@@ -989,6 +989,9 @@ nav.primary-navigation ul.nav-menu:not(.vc) > li.menu-item > a.menu-link {
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
+.mega-toggle-on {
+  background: rgba(54, 53, 51, 0.9);
+}
 
 /* FIM MENU */
 
@@ -3110,7 +3113,6 @@ ul.table-img li img {
   padding: 20px 5%;
   margin:auto;
   background: url('img/bg-form-search.png')  #fdbd00;
-  color: #fff;
   border-top: 4px solid rgba(54, 53, 51, 0.9);
   border-bottom: 4px solid rgba(54, 53, 51, 0.9);
   background-size:cover;
@@ -3124,6 +3126,8 @@ ul.table-img li img {
 
 #user_search_form input[type="text"], #user_search_form select {
   border: 2px solid rgba(54, 53, 51, 0.4) !important;
+  width: 100%;
+  color: #666;
 }
 
 .entry-title-form {
