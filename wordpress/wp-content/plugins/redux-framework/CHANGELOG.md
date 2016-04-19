@@ -1,5 +1,36 @@
 # Redux Framework Changelog
 
+## 3.6.0    
+* Fixed:     Fixed Customizer path issues
+* Added:     Added new default arguments filter by opt_name and type.  :)
+* Notice:    WP.org release
+
+## 3.5.9.8  
+* Fixed:    #2903 - False positive flag in border field JS.  Avast doesn't like empty document ready statements.
+
+## 3.5.9.7  
+* Fixed:    #2880 - More issues with the extensions_url routine.
+
+## 3.5.9.6  
+* Fixed:    #2876 - Fixing more unvetted user contributions.
+
+## 3.5.9.5
+* Modified: #2855 - Extensions now have a helper class to help composer-based installs. Thanks @2ndkauboy!
+
+## 3.5.9.4
+* Fixed:    #2857 - Required 'contains' not properly evaluating with checkboxes.
+
+## 3.5.9.3
+* Fixed:    #2831 - Localization was complete broken.
+* Fixed:    #2832 - CSS conflicts with Rev Slider (Hey, Rev Slider guys, you don't have to load your CSS on every admin page.  Really?)
+
+## 3.5.9.2
+* Fixed:    Leftover debug echo line in basic customizer extension.
+
+## 3.5.9.1
+* Added:    EXPERIMENTAL:  New parsing code in an effort to break the 1000 max_input_var issue that crops up from time to time. Thanks, @harunbasic
+* Added:    EXPERIMENTAL:  "Bugfix" for extension_url in an effort to make it correct.  Thanks, @ottok
+
 ## 3.5.9
 * Notice:   New wp.org release
 
@@ -46,7 +77,7 @@
 * Fixed:    #2677 - tinymce javascript errors when wp editor is disabled.
 
 ## 3.5.8.3
-* Modified: While in dev_mode, noticies will appear if Redux sample data in share_icons and admin_bar_links arguments is not changed.
+* Modified: While in dev_mode, notices will appear if Redux sample data in share_icons and admin_bar_links arguments is not changed.
             This became necessary because devs are not changing this data and theme ends users are coming to us for theme support.
 * Modified: Redux links to be // instead of http:// or https:// to ensure portability for secure sites.
 

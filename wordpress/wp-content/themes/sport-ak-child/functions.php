@@ -30,7 +30,110 @@ function load_files() {
 	wp_die();
 }
 
+add_action( 'wp_ajax_load_cities', 'load_cities' );
+add_action( 'wp_ajax_nopriv_load_cities', 'load_cities' );
 
-/* Please add your custom functions code below this line. */
+
+function load_cities() {
+
+	global $wpdb;
+
+	$state = $_REQUEST['estado'];
+
+	$query = 'SELECT cod_cidades, nome FROM '.$wpdb->prefix.'cidades WHERE '.$wpdb->prefix.'estados.cod_estados = '.$state.' ORDER BY nome';
+
+	$results = $wpdb->get_results($query, OBJECT);
+
+	echo json_encode($results);
+	
+	die();
+}
+
+add_shortcode('user_search', 'search_user_shortcode');
+
+
+function search_user_shortcode() {
+
+	 echo user_search_form();
+	}
+
+function user_search_form() {
+
+	ob_start(); ?>
+	<form id="user_search_form" method="GET" action="">
+	<?php wp_nonce_field('user_search_form', 'user_search_form_submitted');?>
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="entry-title-form">Pesquisa de jogadores</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-xs-12">
+				<label for="name_user">Nome:</label>
+				<input type="text" name="name_user" id="name_user" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<label for="position_user">Posição :</label>
+				<select name="position_user">
+					<option value="Goleiro">Goleiro</option>
+				</select>		
+			</div>
+			<div class="col-lg-4">
+				<label for="date_of_birth_min_user">
+					Data de nascimento entre : 
+				</label>
+				<input type="text" value="" id="date_of_birth_user" name="date_of_birth_min_user"  />
+			</div>
+			<div class="col-lg-4">
+				<label for="date_of_birth_min_user">
+					Até : 
+				</label>
+				<input type="text" value="" id="date_of_birth_user" name="date_of_birth_max_user"  />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<label for="height_user">
+					Altura :
+				</label>
+				<select name="height_user" id="height_user">
+					<option>1.50 a 1.55</option>
+				</select>
+			</div>
+			<div class="col-lg-4">
+				<label for="state_user">
+					Estado :
+				</label>
+					<select name="state_user">
+						<option>1</option>
+					</select>
+				</label>
+			</div>
+			<div class="col-lg-4">
+				<label for="city_user">
+					Cidade :
+				</label>
+					<select name="city_user">
+						<option>1</option>
+					</select>
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<input type="submit" id="sui_submit" class="pricing-button" name="sui_submit" value="Pesquisar jogador" style="margin-top: 20px;">
+			</div>
+		</div>
+	</form> 
+	<?php 
+ 	
+ 	$output = ob_get_contents();
+   	ob_clean(); 
+    return $output; 
+  }
+
+
 
 

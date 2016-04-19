@@ -4,8 +4,8 @@
  * Plugin Name: JP Widget Visibility
  * Plugin URI: http://wordpress.org/plugins/jetpack-widget-visibility/
  * Description: Control what pages your widgets appear on.
- * Author: JP Bot
- * Version: 3.8.0
+ * Author: JP
+ * Version: 3.9.6
  * Text Domain: jetpack
  * Domain Path: /languages/
  * License: GPL2 or later
