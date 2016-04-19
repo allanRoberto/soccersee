@@ -35,7 +35,6 @@ if(isset( $_GET['user_search_form_submitted'] ) && wp_verify_nonce($_GET['user_s
                             <?php 
                                 foreach ($results as $result) :
                                          $info_user = get_user_meta( $result );
-                                        var_dump($info_user);
                                     ?>
                                     <div class="filtered">
                                         <div class="entry player-mini azsc_player type-azsc_player has-post-thumbnail hentry position-defender">
