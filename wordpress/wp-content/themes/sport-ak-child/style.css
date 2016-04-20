@@ -3139,3 +3139,30 @@ ul.table-img li img {
   margin-bottom: 10px;
 }
 
+.social .wpb_text_column {
+  display: none;
+}
+
+.social .en {
+  background: url('img/us.png') left top no-repeat;
+  display: block;
+  width: 25px;
+  height: 25px;
+  text-indent: 9999px;
+}
+
+.social .es {
+  background: url('img/Spain.png') left top no-repeat;
+  display: block;
+  width: 25px;
+  height: 25px;
+  text-indent: 9999px;  
+}
+
+.social .pt {
+  background: url('img/pt.png') left top no-repeat;
+  display: block;
+  width: 25px;
+  height: 25px;
+  text-indent: 9999px;  
+}
