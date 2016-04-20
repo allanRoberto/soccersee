@@ -3179,3 +3179,7 @@ ul.table-img li img {
 .filters-header{
   display: none;
 }
+
+.entry.testimonial .entry-thumbnail::before, .entry.testimonial .entry-thumbnail::after {
+  content:none !important;
+}
