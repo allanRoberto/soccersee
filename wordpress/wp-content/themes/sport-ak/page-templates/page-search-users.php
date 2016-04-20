@@ -84,6 +84,7 @@ if(isset( $_GET['user_search_form_submitted'] ) && wp_verify_nonce($_GET['user_s
                         <?php echo $title; ?>
                         <div class="posts-list player-mini   our-team horizontal-list-4">
                             <?php 
+                                if(!empty($user_query->results)) {
                                 foreach ($user_query->results as $info_user) :
                                     $info_user = objectToArray($info_user);
                                     $info_user = get_user_meta($info_user['ID']);
@@ -115,7 +116,8 @@ if(isset( $_GET['user_search_form_submitted'] ) && wp_verify_nonce($_GET['user_s
                                             </div>
                                         </div>
                                     </div>
-                               <?php endforeach; ?>
+                               <?php endforeach; 
+                               }?>
                         </div>
                 <?php endwhile; ?>
             </div>

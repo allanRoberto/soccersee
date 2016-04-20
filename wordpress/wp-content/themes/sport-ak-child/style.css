@@ -3170,3 +3170,7 @@ ul.table-img li img {
 .vc_custom_1445956240556 {
   margin-left: auto;
 }
+
+.carousel-wrapper.trainers .carousel .owl-controls .owl-nav {
+  bottom: -50px !important;
+}

@@ -113,19 +113,19 @@
                     <h2 class="text-player">Fotos</h2>
                 </div>
                 <div class="entry-content">
-                    <p><?php echo $info_user['habilidades'][0]; ?></p>
+                    <p class="text-center"><?php echo $info_user['habilidades'][0]; ?></p>
                 </div>
                 <div class="entry-header">
                     <h2 class="text-player">Vídeos</h2>
                 </div>
                 <div class="entry-content">
-                    <p><?php echo $info_user['habilidades'][0]; ?></p>
+                    <p class="text-center"><?php echo $info_user['habilidades'][0]; ?></p>
                 </div>
                 <div class="entry-header">
                     <h2 class="text-player">Habilidades</h2>
                 </div>
                 <div class="entry-content">
-                    <p><?php echo $info_user['user-skills'][0]; ?></p>
+                    <p class="text-center"><?php echo $info_user['user-skills'][0]; ?></p>
                 </div>
                 <div class="entry-header">
                     <h2 class="text-player">Clubes em que jogou </h2>
