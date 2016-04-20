@@ -4,7 +4,7 @@
  */
 
 
- $info_user = get_user_meta( 1 );
+ $info_user = get_user_meta( $_GET['user_id'] );
 ?>
 
 <?php get_header(); ?>
@@ -24,7 +24,7 @@
                                                 <div class="wpb_wrapper">
                                                     <div class="field ">
                                                         <div class="entry-thumbnail">
-                                                                <div class="image " style="background-image: url(&quot;http://soccersee.art.com.br/wp-content/uploads/2015/10/006-470x484.jpg&quot;); height: 484px;" data-width="470" data-height="484">
+                                                                <div class="image " style="background-image: url(<?php echo $info_user['user_avatar'][0]; ?>); height: 484px;" data-width="470" data-height="484">
                                                                 </div>
                                                         </div>
                                                     </div>
@@ -44,52 +44,47 @@
                                                             </div>
                                                             <div class="field ">
                                                                 <span class="player-position">
-                                                                    <label>Sexo</label><?php echo $info_user['sexo'][0]; ?>
+                                                                    <label>Sexo</label><?php echo $info_user['user-genre'][0]; ?>
                                                                 </span>
                                                             </div>
                                                             <div class="field ">
                                                                 <span class="player-position">
-                                                                    <label>Altura</label><?php echo $info_user['altura'][0]; ?>
+                                                                    <label>Data de nascimento</label><?php echo $info_user['user-date-of-birth'][0]; ?>
                                                                 </span>
                                                             </div>
                                                             <div class="field ">
                                                                 <span class="player-position">
-                                                                    <label>Data de nascimento</label><?php echo $info_user['data-nascimento'][0]; ?>
-                                                                </span>
-                                                            </div>
-                                                            <div class="field ">
-                                                                <span class="player-position">
-                                                                    <label>Escolaridade</label><?php echo $info_user['escolaridade'][0]; ?>
+                                                                    <label>Escolaridade</label><?php echo $info_user['user-schooling'][0]; ?>
                                                                 </span>
                                                             </div>
                                                              <div class="field ">
                                                                 <span class="player-position">
-                                                                    <label>Nacionalidade</label><?php echo $info_user['nacionalidade'][0]; ?>
+                                                                    <label>Nacionalidade</label><?php echo $info_user['user-nationality'][0]; ?>
                                                                 </span>
                                                             </div>
                                                             <div class="field ">
                                                                 <span class="player-position">
-                                                                    <label>Idiomas</label><?php echo $info_user['1-idioma'][0]; ?> <?php echo $info_user['2-idioma'][0]; ?> <?php echo $info_user['3_idioma'][0]; ?>
+                                                                    <label>Idiomas</label><?php echo $info_user['user-first-language'][0]; ?> <?php echo $info_user['user-second-language'][0]; ?> <?php echo $info_user['user-third-language'][0]; ?>
                                                                 </span>
                                                             </div>
                                                             <div class="field ">
                                                                 <span class="player-position">
-                                                                    <label>Posição 1</label><?php echo $info_user['opcao_01'][0]; ?>
+                                                                    <label>Posição 1</label><?php echo $info_user['user-first-position'][0]; ?>
                                                                 </span>
                                                             </div>
                                                             <div class="field ">
                                                                 <span class="player-position">
-                                                                    <label>Posição 2</label><?php echo $info_user['opcao_02'][0]; ?>
+                                                                    <label>Posição 2</label><?php echo $info_user['user-second-position'][0]; ?>
                                                                 </span>
                                                             </div>
                                                             <div class="field ">
                                                                 <span class="player-position">
-                                                                    <label>Posição 3</label><?php echo $info_user['opcao_03'][0]; ?>
+                                                                    <label>Posição 3</label><?php echo $info_user['user-third-position'][0]; ?>
                                                                 </span>
                                                             </div>
                                                              <div class="field ">
                                                                 <span class="player-position">
-                                                                    <label>Interesse em jogar fora ?</label><?php echo $info_user['deseja_jogar_fora_do_pas'][0]; ?>
+                                                                    <label>Interesse em jogar fora ?</label><?php echo $info_user['user-play-out-contry'][0]; ?>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -130,7 +125,7 @@
                     <h2 class="text-player">Habilidades</h2>
                 </div>
                 <div class="entry-content">
-                    <p><?php echo $info_user['habilidades'][0]; ?></p>
+                    <p><?php echo $info_user['user-skills'][0]; ?></p>
                 </div>
                 <div class="entry-header">
                     <h2 class="text-player">Clubes em que jogou </h2>
@@ -141,37 +136,38 @@
                             <div class="panel-content">
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Nome do clube</label><?php echo $info_user['nickname'][0]; ?>
+                                        <label>Nome do clube</label><?php echo $info_user['user-name-first-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Posição em que jogava</label><?php echo $info_user['sexo'][0]; ?>
+                                        <label>Posição em que jogava</label><?php echo $info_user['user-position-first-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Cidade:</label><?php echo $info_user['altura'][0]; ?>
+                                        <label>Cidade:</label><?php echo $info_user['user-city-first-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Estado: </label><?php echo $info_user['data-nascimento'][0]; ?>
+                                        <label>Estado: </label><?php echo $info_user['user-state-first-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>País</label><?php echo $info_user['escolaridade'][0]; ?>
+                                        <label>País</label><?php echo $info_user['user-country-first-club'][0]; ?>
                                     </span>
                                 </div>
                                  <div class="field ">
                                     <span class="player-position">
-                                        <label>Títulos e prêmios</label><?php echo $info_user['nacionalidade'][0]; ?>
+                                        <label>Títulos e prêmios</label><br><?php echo $info_user['user-premium-first-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Informações complementares</label><?php echo $info_user['1-idioma'][0]; ?> <?php echo $info_user['2-idioma'][0]; ?> <?php echo $info_user['3_idioma'][0]; ?>
+                                        <label>Informações complementares</label><br>
+                                        <?php echo $info_user['user-information-additional-first-club'][0];?> 
                                     </span>
                                 </div>
                             </div>
@@ -184,37 +180,38 @@
                             <div class="panel-content">
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Nome do clube</label><?php echo $info_user['nickname'][0]; ?>
+                                        <label>Nome do clube</label><?php echo $info_user['user-name-second-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Posição em que jogava</label><?php echo $info_user['sexo'][0]; ?>
+                                        <label>Posição em que jogava</label><?php echo $info_user['user-position-second-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Cidade:</label><?php echo $info_user['altura'][0]; ?>
+                                        <label>Cidade:</label><?php echo $info_user['user-city-second-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Estado: </label><?php echo $info_user['data-nascimento'][0]; ?>
+                                        <label>Estado: </label><?php echo $info_user['user-state-second-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>País</label><?php echo $info_user['escolaridade'][0]; ?>
+                                        <label>País</label><?php echo $info_user['user-country-second-club'][0]; ?>
                                     </span>
                                 </div>
                                  <div class="field ">
                                     <span class="player-position">
-                                        <label>Títulos e prêmios</label><?php echo $info_user['nacionalidade'][0]; ?>
+                                        <label>Títulos e prêmios</label><br><?php echo $info_user['user-premium-second-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Informações complementares</label><?php echo $info_user['1-idioma'][0]; ?> <?php echo $info_user['2-idioma'][0]; ?> <?php echo $info_user['3_idioma'][0]; ?>
+                                        <label>Informações complementares</label><br>
+                                        <?php echo $info_user['user-information-additional-second-club'][0];?> 
                                     </span>
                                 </div>
                             </div>
@@ -227,37 +224,38 @@
                             <div class="panel-content">
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Nome do clube</label><?php echo $info_user['nickname'][0]; ?>
+                                        <label>Nome do clube</label><?php echo $info_user['user-name-third-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Posição em que jogava</label><?php echo $info_user['sexo'][0]; ?>
+                                        <label>Posição em que jogava</label><?php echo $info_user['user-position-third-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Cidade:</label><?php echo $info_user['altura'][0]; ?>
+                                        <label>Cidade:</label><?php echo $info_user['user-city-third-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Estado: </label><?php echo $info_user['data-nascimento'][0]; ?>
+                                        <label>Estado: </label><?php echo $info_user['user-state-third-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>País</label><?php echo $info_user['escolaridade'][0]; ?>
+                                        <label>País</label><?php echo $info_user['user-country-third-club'][0]; ?>
                                     </span>
                                 </div>
                                  <div class="field ">
                                     <span class="player-position">
-                                        <label>Títulos e prêmios</label><?php echo $info_user['nacionalidade'][0]; ?>
+                                        <label>Títulos e prêmios</label><br><?php echo $info_user['user-premium-third-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Informações complementares</label><?php echo $info_user['1-idioma'][0]; ?> <?php echo $info_user['2-idioma'][0]; ?> <?php echo $info_user['3_idioma'][0]; ?>
+                                        <label>Informações complementares</label><br>
+                                        <?php echo $info_user['user-information-additional-third-club'][0];?> 
                                     </span>
                                 </div>
                             </div>
@@ -270,37 +268,38 @@
                             <div class="panel-content">
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Nome do clube</label><?php echo $info_user['nickname'][0]; ?>
+                                        <label>Nome do clube</label><?php echo $info_user['user-name-four-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Posição em que jogava</label><?php echo $info_user['sexo'][0]; ?>
+                                        <label>Posição em que jogava</label><?php echo $info_user['user-position-four-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Cidade:</label><?php echo $info_user['altura'][0]; ?>
+                                        <label>Cidade:</label><?php echo $info_user['user-city-four-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Estado: </label><?php echo $info_user['data-nascimento'][0]; ?>
+                                        <label>Estado: </label><?php echo $info_user['user-state-four-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>País</label><?php echo $info_user['escolaridade'][0]; ?>
+                                        <label>País</label><?php echo $info_user['user-country-four-club'][0]; ?>
                                     </span>
                                 </div>
                                  <div class="field ">
                                     <span class="player-position">
-                                        <label>Títulos e prêmios</label><?php echo $info_user['nacionalidade'][0]; ?>
+                                        <label>Títulos e prêmios</label><br><?php echo $info_user['user-premium-four-club'][0]; ?>
                                     </span>
                                 </div>
                                 <div class="field ">
                                     <span class="player-position">
-                                        <label>Informações complementares</label><?php echo $info_user['1-idioma'][0]; ?> <?php echo $info_user['2-idioma'][0]; ?> <?php echo $info_user['3_idioma'][0]; ?>
+                                        <label>Informações complementares</label><br>
+                                        <?php echo $info_user['user-information-additional-four-club'][0];?> 
                                     </span>
                                 </div>
                             </div>

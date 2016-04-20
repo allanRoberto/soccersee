@@ -16,6 +16,8 @@ add_action('wp_enqueue_scripts', 'azexo_custom_scripts');
 function azexo_custom_scripts() {
     wp_register_script('custom-js', get_template_directory_uri() . '-child/js/custom.js', array('jquery'), AZEXO_THEME_VERSION, true);
     wp_enqueue_script('custom-js');
+    wp_register_script('maskinput-js', get_template_directory_uri() . '-child/js/jquery.maskedinput.min.js', array('jquery'), AZEXO_THEME_VERSION, true);
+    wp_enqueue_script('maskinput-js');
 }
 
 add_action( 'wp_ajax_load_files', 'load_files' );
@@ -207,14 +209,41 @@ function user_search_form() {
 					Estado :
 				</label>
 					<select name="state_user">
-						<option>1</option>
+						<option value="Acre"/>Acre</option>
+						<option value="Alagoas"/>Alagoas</option>
+						<option value="Amapá"/>Amapá</option>
+						<option value="Amazonas"/>Amazonas</option>
+						<option value="Bahia"/>Bahia</option>
+						<option value="Ceará"/>Ceará</option>
+						<option value="Distrito Federal"/>Distrito Federal</option>
+						<option value="Espírito Santo"/>Espírito Santo</option>
+						<option value="Goiás"/>Goiás</option>
+						<option value="Maranhão"/>Maranhão</option>
+						<option value="Mato Grosso"/>Mato Grosso</option>
+						<option value="Mato Grosso do Sul"/>Mato Grosso do Sul</option>
+						<option value="Minas Gerais"/>Minas Gerais</option>
+						<option value="Pará"/>Pará</option> 
+						<option value="Paraíba"/>Paraíba</option>
+						<option value="Paraná"/>Paraná</option>
+						<option value="Pernambuco"/>Pernambuco</option>
+						<option value="Piauí"/>Piauí</option>
+						<option value="Rio de Janeiro"/>Rio de Janeiro</option>
+						<option value="Rio Grande do Norte"/>Rio Grande do Norte</option>
+						<option value="Rio Grande do Sul"/>Rio Grande do Sul</option>
+						<option value="Rondônia"/>Rondônia</option>
+						<option value="Roraima"/>Roraima</option>
+						<option value="Santa Catarina"/>Santa Catarina</option>
+						<option value="São Paulo"/>São Paulo</option>
+						<option value="Sergipe"/>Sergipe</option>
+						<option value="Tocantins "/>Tocantins</option>					
 					</select>
 				</label>
 			</div>
 			<div class="col-lg-6">
 				<label for="position_user">Posição :</label>
 				<select name="position_user">
-					<option value="Goleiro" selected="selected">Goleiro</option>
+					<option value="" selected="selected">Selecione uma posição</option>
+					<option value="Goleiro">Goleiro</option>
 					<option value="Zagueiro">Zagueiro</option>
 					<option value="Lateral esquerdo">Lateral esquerdo</option>
 					<option value="Lateral Direito">Lateral Direito</option>
