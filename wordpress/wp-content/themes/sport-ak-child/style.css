@@ -3175,3 +3175,7 @@ ul.table-img li img {
   bottom: -50px !important;
   top:auto !important;
 }
+
+.filters-header{
+  display: none;
+}
