@@ -3173,4 +3173,5 @@ ul.table-img li img {
 
 .carousel-wrapper.trainers .carousel .owl-controls .owl-nav {
   bottom: -50px !important;
+  top:auto !important;
 }
