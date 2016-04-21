@@ -3183,3 +3183,9 @@ ul.table-img li img {
 .entry.testimonial .entry-thumbnail::before, .entry.testimonial .entry-thumbnail::after {
   content:none !important;
 }
+
+.wpcf7-f357-p273-o1 p {
+  display: table !important;
+  width: 100% !important;
+  margin-bottom: 0px !important;
+}

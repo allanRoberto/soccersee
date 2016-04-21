@@ -12,7 +12,7 @@ role :web, "soccersee.com"
 role :db, "soccersee.com", :primary => true
 
 # The path to wp-cli
-set :wp, "cd #{current_path}/#{app_root} ; /home/soccersee/bin/wp"
+set :wp, "wp"
 
 # The username on the target system, if different from your local username
 ssh_options[:user] = 'soccersee'
