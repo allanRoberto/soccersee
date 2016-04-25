@@ -68,9 +68,9 @@ function pmpro_shortcode_account($atts, $content=null, $code="")
 									<?php 
 										//To do: Only show CHANGE link if this level is in a group that has upgrade/downgrade rules
 										if(count($pmpro_levels) > 1 && !defined("PMPRO_DEFAULT_LEVEL")) { ?>
-										<a href="<?php echo pmpro_url("levels")?>"><?php _e("Change", "pmpro");?></a>
+										<a href="<?php echo pmpro_url("levels")?>" class="pricing-button"><?php _e("Change", "pmpro");?></a>
 									<?php } ?>
-									<a href="<?php echo pmpro_url("cancel", "?level=" . $current_user->membership_level->id)?>"><?php _e("Cancel", "pmpro");?></a>
+									<a href="<?php echo pmpro_url("cancel", "?level=" . $current_user->membership_level->id)?>" class="pricing-button"><?php _e("Cancel", "pmpro");?></a>
 									<?php do_action("pmpro_member_action_links_after"); ?>
 								</div> <!-- end pmpro_actionlinks -->
 							</td>
@@ -90,7 +90,7 @@ function pmpro_shortcode_account($atts, $content=null, $code="")
 				</table>
 				<?php //Todo: If there are multiple levels defined that aren't all in the same group defined as upgrades/downgrades ?>
 				<div class="pmpro_actionlinks">
-					<a href="<?php echo pmpro_url("levels")?>"><?php _e("View all Membership Options", "pmpro");?></a>
+					<a href="<?php echo pmpro_url("levels")?>" class="pricing-button"><?php _e("View all Membership Options", "pmpro");?></a>
 				</div>
 
 			</div> <!-- end pmpro_account-membership -->
@@ -110,8 +110,8 @@ function pmpro_shortcode_account($atts, $content=null, $code="")
 					<?php do_action('pmpro_account_bullets_bottom');?>
 				</ul>
 				<div class="pmpro_actionlinks">
-					<a href="<?php echo admin_url('profile.php')?>"><?php _e("Edit Profile", "pmpro");?></a>
-					<a href="<?php echo admin_url('profile.php')?>"><?php _e('Change Password', 'pmpro');?></a>
+					<a href="<?php echo get_permalink(1079); ?>" class="pricing-button"><?php _e("Edit Profile", "pmpro");?></a>
+					<a href="<?php echo admin_url('profile.php')?>" class="pricing-button"><?php _e('Change Password', 'pmpro');?></a>
 				</div>
 			</div> <!-- end pmpro_account-profile -->
 		<?php } ?>
@@ -152,7 +152,7 @@ function pmpro_shortcode_account($atts, $content=null, $code="")
 				</tbody>
 			</table>						
 			<?php if($count == 6) { ?>
-				<div class="pmpro_actionlinks"><a href="<?php echo pmpro_url("invoice"); ?>"><?php _e("View All Invoices", "pmpro");?></a></div>
+				<div class="pmpro_actionlinks"><a href="<?php echo pmpro_url("invoice"); ?>" class="pricing-button"><?php _e("View All Invoices", "pmpro");?></a></div>
 			<?php } ?>
 		</div> <!-- end pmpro_account-invoices -->
 		<?php } ?>

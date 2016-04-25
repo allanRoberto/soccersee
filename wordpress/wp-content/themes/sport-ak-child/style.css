@@ -1162,6 +1162,11 @@ section.small .pricing-table {
 
 }
 
+.pricing-button:hover {
+  text-decoration: none;
+  color: #fdbd00;
+}
+
 .pricing-plan-active {
     z-index: 2;
     margin-top: -2.25rem;
@@ -3176,10 +3181,15 @@ ul.table-img li img {
   top:auto !important;
 }
 
-.entry-date, .entry-more, .entry-footer, .archive-subtitle {
+.entry-date, .entry-more, .entry-footer, .archive-subtitle, .filters-header  {
   display: none !important;
 }
 
 .site-content.masonry-post .entry.masonry-post .entry-data .entry-title {
   min-height: 44px !important;
+}
+
+.pmpro_actionlinks a {
+      padding: 14px 25px !important;
+      float: none !important; 
 }
