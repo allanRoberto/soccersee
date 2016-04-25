@@ -138,11 +138,11 @@
 ?>
 <nav id="nav-below" class="navigation" role="navigation">
 	<div class="nav-next alignright">
-		<a href="<?php echo pmpro_url("account")?>"><?php _e('View Your Membership Account &rarr;', 'pmpro');?></a>
+		<a href="<?php echo pmpro_url("account")?>" class="pricing-button"><?php _e('View Your Membership Account &rarr;', 'pmpro');?></a>
 	</div>
 	<?php if($pmpro_invoice) { ?>
 		<div class="nav-prev alignleft">
-			<a href="<?php echo pmpro_url("invoice")?>"><?php _e('&larr; View All Invoices', 'pmpro');?></a>
+			<a href="<?php echo pmpro_url("invoice")?>" class="pricing-button"><?php _e('&larr; View All Invoices', 'pmpro');?></a>
 		</div>
 	<?php } ?>
 </nav>

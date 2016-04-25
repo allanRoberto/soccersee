@@ -3176,16 +3176,10 @@ ul.table-img li img {
   top:auto !important;
 }
 
-.filters-header{
-  display: none;
+.entry-date, .entry-more, .entry-footer, .archive-subtitle {
+  display: none !important;
 }
 
-.entry.testimonial .entry-thumbnail::before, .entry.testimonial .entry-thumbnail::after {
-  content:none !important;
-}
-
-#wpcf7-f357-p273-o1 p {
-  display: table !important;
-  width: 100% !important;
-  margin-bottom: 0px !important;
+.site-content.masonry-post .entry.masonry-post .entry-data .entry-title {
+  min-height: 44px !important;
 }
