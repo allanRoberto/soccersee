@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('ABSPATH'))
+if (!defined('ABSPATH')) 
     exit; // Exit if accessed directly
 
 add_action('after_setup_theme', 'azexo_load_childtheme_languages', 5);
