@@ -25,14 +25,6 @@ get_header();
             <?php while (have_posts()) : the_post(); ?>
                 <?php get_template_part('content', get_post_format()); ?>                
 
-                <?php
-                if (isset($options['comments']) && $options['comments']) {
-                    if (comments_open()) {
-                        comments_template();
-                    }
-                }
-                ?>
-
             <?php endwhile; ?>
 
         </div><!-- #content -->
