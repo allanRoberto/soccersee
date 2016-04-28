@@ -12,7 +12,7 @@
     if (has_nav_menu('signature-steps')) {
         wp_nav_menu(array(
             'theme_location' => 'signature-steps',
-            'menu_class' => 'nav-menu',
+            'menu_class' => 'nav-menu container',
             'menu_id' => 'signature-steps-menu',
             'walker' => new Azexo_Walker_Nav_Menu(),
         ));
@@ -21,7 +21,7 @@
     </nav>
         <?php while (have_posts()) : the_post(); ?>
             <div id="post-<?php the_ID(); ?>" <?php post_class('entry'); ?>>
-                <div class="entry-content content-signature">
+                <div class="entry-content content-signature container">
                     <?php the_content(); ?>
                     <?php wp_link_pages(array('before' => '<div class="page-links"><span class="page-links-title">' . esc_html__('Pages:', 'sport-ak') . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>')); ?>
                 </div><!-- .entry-content -->

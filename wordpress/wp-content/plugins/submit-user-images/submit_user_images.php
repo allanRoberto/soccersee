@@ -104,16 +104,53 @@ function sui_form_shortcode(){
 
   echo sui_get_upload_image_form($sui_image_caption = 'img-'.$current_user->ID);
  
-  if($user_images_table = sui_get_user_images_table($current_user->ID)){
-   
-    echo $user_images_table;
-     
-  }
+  
 }
 
   function sui_get_upload_image_form($sui_image_caption = ''){
+    ob_start();
+    ?>
+      <div class="container grid-images">
+      <div class="row">
+        <div class="col-lg-4">
+          <h2 class="title-gallery-images">
+            Envie suas fotos
+          </h2>
+          <p>Clique no botão abaixo para selecionar suas fotos do seu perfil:</p>
+          <div class="form-gallery-images-container">
+            <form id="sui_upload_image_form" method="post" action="" enctype="multipart/form-data">
+              <?php wp_nonce_field('sui_upload_image_form', 'sui_upload_image_form_submitted'); ?>
+              <div class="clearfix"></div>
+              <div class="custom-file-upload">
+                <input type="file" id="file" name="sui_image_file" />
+            </div>
+                <input type="submit" id="sui_submit" class="pricing-button" name="sui_submit" value="Enviar foto">
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <h2 class="title-gallery-images">
+            Confira suas fotos enviadas
+          </h2>
+          <p>Para remover as fotos já cadastradas basta selecionar as que deseja excluir e depois clicar no botão: <br>"Deletar imagens selecionadas"</p>
+            <?php 
+            if($user_images_table = sui_get_user_images_table($current_user->ID)){
+   
+            echo $user_images_table;
+     
+            } 
+            ?>
+
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    <?php 
+
+    ob_flush();
  
-    $out = '<form id="sui_upload_image_form" method="post" action="" enctype="multipart/form-data">';
+    /* $out = '<form id="sui_upload_image_form" method="post" action="" enctype="multipart/form-data">';
     $out .= '<h2>Envie suas fotos:</h2>';
     $out .= wp_nonce_field('sui_upload_image_form', 'sui_upload_image_form_submitted');
     $out .= '<label for="sui_image_file">Selecione uma imagem: </label><br/>';  
@@ -121,9 +158,8 @@ function sui_form_shortcode(){
        
     $out .= '<input type="submit" id="sui_submit" class="pricing-button" name="sui_submit" value="Enviar foto">';
    
-    $out .= '</form><div class="clearfix"></div>';
+    $out .= '</form><div class="clearfix"></div>';*/
    
-    return $out; 
   }
 
 
@@ -145,27 +181,24 @@ function sui_form_shortcode(){
      
     $out .= wp_nonce_field('sui_form_delete', 'sui_form_delete_submitted');  
      
-    $out .= '<div id="user_images">';
-    $out .= '<h2>Fotos enviadas : </h2>';
+    $out .= '<div class="row">';
     $out .= '<p class="text-center">Clique na imagem para visualizar</p>';
-    $out .= '<ul class="table-img">';
-       
     foreach($user_images->posts as $user_image){
-   
       $post_thumbnail_id = get_post_thumbnail_id($user_image->ID);   
-   
       $out .= wp_nonce_field('sui_image_delete_' . $user_image->ID, 'sui_image_delete_id_' . $user_image->ID, false); 
           
-      $out .= '<li>';
-      $out .= '<span class="container-img">' . wp_get_attachment_link($post_thumbnail_id, 'thumbnail') . '</span>';    
-      $out .= '<span class="description-img"><input type="checkbox" name="sui_image_delete_id[]" value="' . $user_image->ID . '" /><label for="sui_image_delete_id">Remover foto</label></span>';          
-      $out .= '</li>';
+      $out .= '<div class="col-lg-4 col-xs-12 grid-image">';
+      $out .= '<div class="checkbox">
+                  <input type="checkbox" id="sui_image_delete_id" name="sui_image_delete_id[]" value="' . $user_image->ID . '" class="checkbox-custom" /> 
+                  <label class="checkbox-custom-label" for="sui_image_delete_id">Remover Imagem</label>
+              </div>';
+      $out .=  wp_get_attachment_link($post_thumbnail_id, 'thumbnail');    
+      $out .= '</div>';
        
     }
-   
-    $out .= '</ul>';
-       
+    $out .= "</div><div class='row'><div class='col-lg-12 col-xs-12 buttom-delete'>";       
     $out .= '<input type="submit" name="sui_delete" class="pricing-button" value="Deletar imagens selecionadas" />';
+    $out .= "</div></div>";
     $out .= '</form>';  
      
     return $out;
