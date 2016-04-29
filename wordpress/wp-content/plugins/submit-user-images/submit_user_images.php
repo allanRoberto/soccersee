@@ -78,7 +78,7 @@ function sui_form_shortcode(){
  
       $user_image_data = array(
         'post_title' => 'img-'.$current_user->ID,
-        'post_status' => 'pending',
+        'post_status' => 'publish',
         'post_author' => $current_user->ID,
         'post_type' => 'user_images'    
       );    
@@ -168,7 +168,7 @@ function sui_form_shortcode(){
     $args = array(
       'author' => $user_id,
       'post_type' => 'user_images',
-      'post_status' => 'pending'   
+      'post_status' => 'publish'   
     );
      
     $user_images = new WP_Query($args);

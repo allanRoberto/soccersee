@@ -3358,6 +3358,10 @@ a.nturl {
   display: none;
 }
 
+.pricing-plan-footer {
+  float: right;
+}
+
 .message-post {
   background: #f2dede;
   color: #a94442;
