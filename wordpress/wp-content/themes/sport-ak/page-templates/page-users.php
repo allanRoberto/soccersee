@@ -20,13 +20,13 @@
                                 <div class="wpb_wrapper">
                                     <div class="vc_row wpb_row vc_inner vc_row-fluid container vc_custom_1444660966900">
                                         <div class="row">
-                                            <div class="wpb_column vc_column_container col-sm-offset-2 col-sm-2">
+                                            <div class="wpb_column vc_column_container col-sm-offset-2 col-sm-3">
                                                 <div class="wpb_wrapper">
                                                     <div class="field ">
                                                         <div class="entry-thumbnail">
                                                                 <div class="image col-jjj" style="
                                                                 background-image: url('http://soccersee.com/wp-content<?php echo $info_user['user_avatar'][0]; ?>');
-                                                                 height: 484px;" data-width="470" data-height="484">
+                                                                 height: 170px; width: 170px;" data-width="470" data-height="484">
                                                                 </div>
                                                         </div>
                                                     </div>
