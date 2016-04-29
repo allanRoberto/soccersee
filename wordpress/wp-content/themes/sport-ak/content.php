@@ -14,68 +14,11 @@ if ($template_name == 'masonry_post') {
 ?>
 
 <div <?php post_class(array('entry', str_replace('_', '-', $template_name))); ?>>
-    <?php if (isset($options[$template_name . '_show_thumbnail']) && $options[$template_name . '_show_thumbnail']) : ?>
-        <?php if (!post_password_required() && !is_attachment()) : ?>
-            <?php if (has_post_format('gallery') && !$image_thumbnail) : ?>
-                <div class="entry-gallery">
-                    <?php
-                    azexo_post_gallery_field($template_name);
-                    ?>
-                    <?php
-                    $hover = azexo_entry_meta($template_name, 'hover');
-                    ?>
-                    <?php if (!empty($hover)) : ?>
-                        <div class="entry-hover">
-                            <?php print $hover; ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php print azexo_entry_meta($template_name, 'thumbnail'); ?>
-                </div>
-            <?php elseif (has_post_format('video') && !$image_thumbnail) : ?>
-                <div class="entry-video">
-                    <?php
-                    azexo_post_video_field();
-                    ?>
-                    <?php
-                    $hover = azexo_entry_meta($template_name, 'hover');
-                    ?>
-                    <?php if (!empty($hover)) : ?>
-                        <div class="entry-hover">
-                            <?php print $hover; ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php print azexo_entry_meta($template_name, 'thumbnail'); ?>
-                </div>
-            <?php else: ?>
-                <?php if (has_post_thumbnail()) : ?>
-                    <div class="entry-thumbnail">
-                        <?php
-                        azexo_post_thumbnail_field($template_name);
-                        ?>                
-                        <?php
-                        $hover = azexo_entry_meta($template_name, 'hover');
-                        ?>
-                        <?php if (!empty($hover)) : ?>
-                            <div class="entry-hover">
-                                <?php print $hover; ?>
-                            </div>
-                        <?php endif; ?>
-                        <?php print azexo_entry_meta($template_name, 'thumbnail'); ?>
-                    </div>
-                <?php endif; ?>
-            <?php endif; ?>
-        <?php endif; ?>
-    <?php endif; ?>
+    
     <div class="entry-data">
         <div class="entry-header">
-            <?php
-            $extra = azexo_entry_meta($template_name, 'extra');
-            ?>
-            <?php if (!empty($extra)) : ?>
-                <div class="entry-extra">
-                    <?php print $extra; ?>
-                </div>
-            <?php endif; ?>
+
+
             <?php
             if (isset($options[$template_name . '_show_title']) && $options[$template_name . '_show_title']) {
                 if (is_single() && $template_name == $default_post_template) :
@@ -161,20 +104,12 @@ if ($template_name == 'masonry_post') {
         <?php
         $footer = azexo_entry_meta($template_name, 'footer');
         ?>
-        <?php if (!empty($footer)) : ?>
-            <div class="entry-footer">
-                <?php print $footer; ?>
-            </div>
-        <?php endif; ?>
+
 
         <?php print azexo_entry_meta($template_name, 'data'); ?>
     </div>    
     <?php
     $additions = azexo_entry_meta($template_name, 'additions');
     ?>
-    <?php if (!empty($additions)) : ?>
-        <div class="entry-additions">
-            <?php print $additions; ?>
-        </div>
-    <?php endif; ?>
+    
 </div>

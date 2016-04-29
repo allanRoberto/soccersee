@@ -3348,3 +3348,22 @@ a.nturl {
 .carousel-wrapper.trainers {
   display: none;
 }
+
+.panel.achievements .panel-content .entry:nth-child(4n+3) {
+      left: 9.87% !important;
+    top: 9.79% !important;
+}
+
+.entry-share {
+  display: none;
+}
+
+.message-post {
+  background: #f2dede;
+  color: #a94442;
+  border-color: #ebccd1;
+  padding: 15px;
+  margin-top: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
