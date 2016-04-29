@@ -24,7 +24,7 @@
                                                 <div class="wpb_wrapper">
                                                     <div class="field ">
                                                         <div class="entry-thumbnail">
-                                                                <div class="image " style="
+                                                                <div class="image col-jjj" style="
                                                                 background-image: url('http://soccersee.com/wp-content<?php echo $info_user['user_avatar'][0]; ?>');
                                                                  height: 484px;" data-width="470" data-height="484">
                                                                 </div>
