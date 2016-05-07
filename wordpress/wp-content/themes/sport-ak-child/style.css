@@ -248,9 +248,9 @@ hr {
   }
 }
 @media (min-width: 1200px) {
-  .container {
+ .container {
     width: 1170px;
-  }
+  } 
 }
 .container-fluid {
   margin-right: auto;
@@ -2979,9 +2979,6 @@ form.pmpro_form label {
     right: -20px;
 }
 
-.entry .entry-content table tbody tr td {
-  border:0px !important;
-}
 
 #pmpro_pricing_fields, #pmpro_user_fields {
   border: 1px solid #ddd !important;
@@ -3235,10 +3232,6 @@ a.nturl {
       float: none !important; 
 }
 
-.pricing-plan-footer {
-  display: table !important;
-}
-
 
 .custom-file-upload-hidden {
     display: none;
@@ -3370,4 +3363,114 @@ a.nturl {
   margin-top: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
+}
+
+.add_to_cart_inline {
+  text-transform: uppercase;
+    padding: 14px 25px;
+    line-height: 1;
+    background: #666;
+    color: #fff;
+    display: table;
+    float: right;
+    border:0px !important;
+    float: right;
+}
+
+.add_to_cart_inline a {
+  color: #fff;
+  text-transform: uppercase !important; 
+}
+
+
+.add_to_cart_inline a:hover {
+  color: #ffc722;
+  text-decoration: none;
+}
+
+.add_to_cart_inline  .amount {
+  display: none;
+}
+
+.woocommerce-info {
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: white;
+    display: block;
+    margin: 10px auto 40px auto;
+}
+
+.woocommerce-info .showcoupon {
+  text-transform: uppercase;
+    padding: 14px 25px;
+    line-height: 1;
+    background: #666;
+    color: #fff;
+    border:0px;
+}
+
+
+.woocommerce-info .showcoupon:hover {
+  color:  #ffc722;
+  text-decoration: none;
+}
+
+.woocommerce-shipping-fields {
+  display: none;
+}
+
+#customer_details .col-1 {
+  width: 100% !important;
+}
+
+
+.woocommerce-billing-fields h3 {
+  width: 100%;
+  float: left;
+}
+
+.woocommerce-billing-fields .form-row-first {
+  width: 48%;
+  margin-right: 2%;
+  float: left;
+}
+
+.woocommerce-billing-fields .form-row-last {
+  width: 48%;
+  margin-left: 2%;
+  float: left;
+}
+
+.woocommerce-checkout-review-order-table thead{
+  display: none;
+}
+
+.woocommerce-checkout-review-order-table th, .woocommerce-checkout-review-order-table td {
+  border-bottom: 1px solid #ccc !important;
+}
+
+.woocommerce-checkout-review-order-table th, .woocommerce-checkout-review-order-table td {
+  border-top: 0px !important;
+  border-right: 0px !important;
+  border-left: 0px !important;
+}
+
+.woocommerce-checkout-review-order-table .product-name {
+  width: 320px;
+}
+
+.woocommerce-thankyou-order-details {
+  margin-bottom: 25px;
+}
+
+.woocommerce-thankyou-order-details header {
+  display: none;
+}
+
+.order-again {
+  display: none;
+}
+
+.woocommerce-message {
+  display: none;
 }

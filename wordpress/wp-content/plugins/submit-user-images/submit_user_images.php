@@ -16,6 +16,8 @@ define('TYPE_WHITELIST', serialize(array(
   'image/gif'
   )));
 
+
+
 add_action('init', 'sui_plugin_init');
 
 function sui_plugin_init(){
@@ -57,8 +59,8 @@ add_shortcode('sui_form', 'sui_form_shortcode');
 
 function sui_form_shortcode(){
 
-  global $current_user;
- 
+  
+
   if(!is_user_logged_in()){
    
     return '<p>Você precisa estar logado para enviar fotos.</p>';    
@@ -107,8 +109,44 @@ function sui_form_shortcode(){
   
 }
 
+  function count_images() {
+    global $current_user;
+  
+    switch ($current_user->membership_level->ID) {
+      case '1':
+        $number_images = 7; 
+      break;
+      
+      case '2':
+        $number_images = 5;
+      break;
+
+      case '3':
+        $number_images = 8;
+      break;    
+      
+      case '4':
+        $number_images = 13;
+        break;
+    }
+
+    $args = array(
+      'author' => $current_user->ID,
+      'post_type' => 'user_images',
+      'post_status' => 'publish'   
+    );
+     
+    $user_images = new WP_Query($args);
+   
+    $count = $user_images->post_count;
+
+    $out = $number_images - $count;
+
+    return $out;
+
+  }
+
   function sui_get_upload_image_form($sui_image_caption = ''){
-    ob_start();
     ?>
       <div class="container grid-images">
       <div class="row">
@@ -119,12 +157,24 @@ function sui_form_shortcode(){
           <p>Clique no botão abaixo para selecionar suas fotos do seu perfil:</p>
           <div class="form-gallery-images-container">
             <form id="sui_upload_image_form" method="post" action="" enctype="multipart/form-data">
+
+            <?php 
+
+                $count = count_images();
+                if(!$count == 0) {
+
+              ?>
               <?php wp_nonce_field('sui_upload_image_form', 'sui_upload_image_form_submitted'); ?>
               <div class="clearfix"></div>
               <div class="custom-file-upload">
                 <input type="file" id="file" name="sui_image_file" />
+
             </div>
+            <?php } ?>
+              <p> Você tem o direito de postar : <strong><?php echo count_images(); ?></strong> fotos</p> 
+              <?php if(!$count == 0) {?>
                 <input type="submit" id="sui_submit" class="pricing-button" name="sui_submit" value="Enviar foto">
+                <?php }?>
             </form>
           </div>
         </div>
@@ -134,11 +184,10 @@ function sui_form_shortcode(){
           </h2>
           <p>Para remover as fotos já cadastradas basta selecionar as que deseja excluir e depois clicar no botão: <br>"Deletar imagens selecionadas"</p>
             <?php 
-            if($user_images_table = sui_get_user_images_table($current_user->ID)){
-   
-            echo $user_images_table;
-     
-            } 
+          
+            echo sui_get_user_images_table();
+            
+  
             ?>
 
           </h2>
@@ -148,7 +197,6 @@ function sui_form_shortcode(){
 
     <?php 
 
-    ob_flush();
  
     /* $out = '<form id="sui_upload_image_form" method="post" action="" enctype="multipart/form-data">';
     $out .= '<h2>Envie suas fotos:</h2>';
@@ -163,17 +211,19 @@ function sui_form_shortcode(){
   }
 
 
-  function sui_get_user_images_table($user_id){
- 
+  function sui_get_user_images_table(){
+    
+    global $current_user;
+
     $args = array(
-      'author' => $user_id,
+      'author' => $current_user->ID,
       'post_type' => 'user_images',
       'post_status' => 'publish'   
     );
      
     $user_images = new WP_Query($args);
    
-    if(!$user_images->post_count) return 0;
+    if(!$user_images->post_count) return false;
      
     $out = '';
      

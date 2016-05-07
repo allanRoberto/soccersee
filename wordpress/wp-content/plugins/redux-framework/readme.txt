@@ -4,7 +4,7 @@ Donate link: http://ideas.reduxframework.com
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 4.6
-Stable tag: 3.6.0
+Stable tag: 3.6.0.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,7 +125,15 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 
 == Changelog ==
 
-## 3.6.0
+## 3.6.0.2
+* Fixed     Outdated customizer.min.js on wp.org causing customizer failure.
+
+## 3.6.0.1
+* Fixed     Outdated redux.min.js on wp.org causing option panel failure.
+* Fixed:    #2936 - Border field outputting px with blank value.
+* Fixed:    Resolved Theme-Check php shortcode false notice.
+* Modified: No more major redirect for the Redux page, only on first install with the plugin.
+* Fixed:    IE11 bug in the customizer. Thanks @anikitas!
 * Fixed:    Customizer path issues
 * Added:    New default arguments filter by opt_name and type.  :)
 * Fixed:    #2903 - False positive flag in border field JS.  Avast doesn't like empty document ready statements.

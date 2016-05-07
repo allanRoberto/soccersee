@@ -9,6 +9,16 @@
 		$('.input-cep').mask('99999-999');
 		$('.input-number').mask('999');
 		$('.input-date').mask('99/99/9999', {placeholder : 'dd/mm/aaaa'});
+
+		$('.input-link-video').change(function(){
+			url = $(this).val();
+
+		    iframe = '<iframe width="420" height="315" src="'.url.'"></iframe>';
+
+			$(this).after().html(iframe);
+
+			alert(iframe);
+		})
 	});
 
 

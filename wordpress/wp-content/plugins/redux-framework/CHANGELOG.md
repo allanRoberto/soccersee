@@ -1,5 +1,15 @@
 # Redux Framework Changelog
 
+## 3.6.0.2
+* Fixed:    Customizer.min.js compression issue. Deploy.
+
+## 3.6.0.1
+* Fixed     Outdated redux.min.js on wp.org causing option panel failure.
+* Fixed:    #2936 - Border field outputting px with blank value.
+* Fixed:    Resolved Theme-Check php shortcode false notice.
+* Modified: No more major redirect for the Redux page, only on first install with the plugin.
+* Fixed:    IE11 bug in the customizer. Thanks @anikitas!
+
 ## 3.6.0    
 * Fixed:     Fixed Customizer path issues
 * Added:     Added new default arguments filter by opt_name and type.  :)
