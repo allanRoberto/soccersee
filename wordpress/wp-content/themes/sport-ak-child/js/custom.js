@@ -13,9 +13,9 @@
 		$('.input-link-video').change(function(){
 			url = $(this).val();
 
-		    iframe = '<iframe width="420" height="315" src="'.url.'"></iframe>';
+		    iframe = '<iframe width="420" height="315" src="'+url+'"></iframe>';
 
-			$(this).after().html(iframe);
+			$(this).after($('div')).html(iframe);
 
 			alert(iframe);
 		})

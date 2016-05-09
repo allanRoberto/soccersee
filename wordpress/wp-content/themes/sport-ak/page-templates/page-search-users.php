@@ -66,7 +66,6 @@ if(isset( $_GET['user_search_form_submitted'] ) && wp_verify_nonce($_GET['user_s
   
 }else {
    $args = array(
-    'blog_id'      => $GLOBALS['blog_id'],
     'role'         => '',
     'meta_query'   => array(),
     'date_query'   => array(),        
@@ -99,16 +98,16 @@ if(isset( $_GET['user_search_form_submitted'] ) && wp_verify_nonce($_GET['user_s
                                 
                                 foreach ($user_query as $info_user) :
                                     $info_user = objectToArray($info_user);
-                                var_dump($info_user);
-                                    $info_user = get_user_meta($info_user['ID']);
-                                    var_dump($info_user);
+                                    $info_user_meta = get_user_meta($info_user['ID']);
+                                    var_dump($info_user_meta);
+
                             ?>
                                     <div class="filtered">
                                         <div class="entry player-mini azsc_player type-azsc_player has-post-thumbnail hentry position-defender">
                                             <div class="entry-thumbnail">
                                                 <a href="<?php echo get_permalink(1139) ?>/?user_id=<?php echo $info_user['ID'] ?>">
                                                     <div class="image" 
-                                                        style="background-image: url(<?php echo $info_user['user_avatar']; ?>); height:300px;"
+                                                        style="background-image: url(<?php echo content_url($info_user_meta['user_avatar'][0]) ?>); height:300px;"
                                                         data-width="300" data-height="300">
                                                     </div>
                                                 </a>
@@ -117,13 +116,13 @@ if(isset( $_GET['user_search_form_submitted'] ) && wp_verify_nonce($_GET['user_s
                                                 <div class="entry-header">
                                                     <h2 class="entry-title">
                                                         <a href="<?php echo get_permalink(1139) ?>/?user_id=<?php echo $info_user['data']['ID'] ?>">
-                                                            <?php echo $info_user['first_name'][0]; ?>
-                                                            <?php echo $info_user['last_name'][0]; ?>          
+                                                            <?php echo $info_user_meta['first_name'][0]; ?>
+                                                            <?php echo $info_user_meta['last_name'][0]; ?>          
                                                         </a>
                                                     </h2>
                                                     <div class="entry-meta">
                                                         <div class="player-position">
-                                                            <?php echo $info_user['user-state-address'][0];?>
+                                                            <?php echo $info_user_meta['user-state-address'][0];?>
                                                         </div>
                                                     </div>
                                                 </div>

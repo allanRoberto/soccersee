@@ -2951,7 +2951,7 @@ form.pmpro_form label {
   text-transform: uppercase;
   color: #fff;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 #signature-steps-menu li a:before{
@@ -3326,6 +3326,7 @@ a.nturl {
   border-bottom: 2px solid #666;
   border-top: 2px solid #666;
   padding: 50px;
+  width: 100%;
 }
 
 .grid-image a {
@@ -3471,6 +3472,10 @@ a.nturl {
   display: none;
 }
 
-.woocommerce-message {
+.fa-shopping-cart {
   display: none;
+}
+
+.site-footer {
+  margin-top: 80px;
 }

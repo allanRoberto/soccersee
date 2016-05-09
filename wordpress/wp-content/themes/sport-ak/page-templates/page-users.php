@@ -25,7 +25,7 @@
                                                     <div class="field ">
                                                         <div class="entry-thumbnail">
                                                                 <div class="image col-jjj" style="
-                                                                background-image: url('http://soccersee.com/wp-content<?php echo $info_user['user_avatar'][0]; ?>');
+                                                                background-image: url('<?php echo content_url($info_user['user_avatar'][0]); ?>');
                                                                  height: 170px; width: 170px;" data-width="470" data-height="484">
                                                                 </div>
                                                         </div>
@@ -113,6 +113,9 @@
             <div class="entry-data">
                 <div class="entry-header">
                     <h2 class="text-player">Fotos</h2>
+                    <div class="container-images">
+                        <?php echo do_shortcode('[sui_table_images id="'.$_GET['user_id'].'"]');?>
+                    </div>
                 </div>
                 <div class="entry-content">
                     <p class="text-center"><?php echo $info_user['habilidades'][0]; ?></p>

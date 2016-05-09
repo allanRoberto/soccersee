@@ -57,6 +57,56 @@ function sui_plugin_init(){
 
 add_shortcode('sui_form', 'sui_form_shortcode');
 
+add_shortcode('sui_table_images', 'sui_table_shortcode' );
+
+function sui_table_shortcode() {
+
+  $atts = shortcode_atts(
+    array(
+      'id' => '',
+    ), $atts );
+
+
+    $args = array(
+      'author' => $id,
+      'post_type' => 'user_images',
+      'post_status' => 'publish'   
+    );
+     
+    $user_images = new WP_Query($args);
+   
+    if(!$user_images->post_count) return false;
+     
+    $out = '';
+     
+    $out .= '<form method="post" action="">';
+     
+    $out .= wp_nonce_field('sui_form_delete', 'sui_form_delete_submitted');  
+     
+    $out .= '<div class="row">';
+    $out .= '<p class="text-center">Clique na imagem para visualizar</p>';
+    foreach($user_images->posts as $user_image){
+      $post_thumbnail_id = get_post_thumbnail_id($user_image->ID);   
+      $out .= wp_nonce_field('sui_image_delete_' . $user_image->ID, 'sui_image_delete_id_' . $user_image->ID, false); 
+          
+      $out .= '<div class="col-lg-4 col-xs-12 grid-image">';
+      $out .= '<div class="checkbox">
+                  <input type="checkbox" id="sui_image_delete_id" name="sui_image_delete_id[]" value="' . $user_image->ID . '" class="checkbox-custom" /> 
+                  <label class="checkbox-custom-label" for="sui_image_delete_id">Remover Imagem</label>
+              </div>';
+      $out .=  wp_get_attachment_link($post_thumbnail_id, 'thumbnail');    
+      $out .= '</div>';
+       
+    }
+    $out .= "</div><div class='row'><div class='col-lg-12 col-xs-12 buttom-delete'>";       
+    $out .= '<input type="submit" name="sui_delete" class="pricing-button" value="Deletar imagens selecionadas" />';
+    $out .= "</div></div>";
+    $out .= '</form>';  
+     
+    return $out;
+
+}
+
 function sui_form_shortcode(){
 
   
