@@ -124,7 +124,7 @@
                     <h2 class="text-player">Vídeos</h2>
                 </div>
                 <div class="entry-content">
-                    <p class="text-center"><?php echo $info_user['habilidades'][0]; ?></p>
+                    <?php echo do_shortcode('[sui_table_videos id="'.$_GET['user_id'].'"]');?>
                 </div>
                 <div class="entry-header">
                     <h2 class="text-player">Habilidades</h2>

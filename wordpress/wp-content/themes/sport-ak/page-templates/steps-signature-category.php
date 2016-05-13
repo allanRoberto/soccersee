@@ -9,7 +9,8 @@
         'post_type' => 'product', 
         'posts_per_page' => 10, 
         'product_cat' => 'assinaturas',
-        'orderby' => 'price',
+        'orderby'   => 'meta_value_num',
+        'meta_key'  => '_price',
         'order' => 'asc'
      );
 
