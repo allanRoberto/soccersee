@@ -3484,3 +3484,7 @@ iframe {
 .site-footer {
   margin-top: 80px;
 }
+
+.about-team .entry-title {
+  color: #ffc722 !important;
+}

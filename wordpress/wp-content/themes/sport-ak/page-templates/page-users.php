@@ -117,9 +117,6 @@
                         <?php echo do_shortcode('[sui_table_images id="'.$_GET['user_id'].'"]');?>
                     </div>
                 </div>
-                <div class="entry-content">
-                    <p class="text-center"><?php echo $info_user['habilidades'][0]; ?></p>
-                </div>
                 <div class="entry-header">
                     <h2 class="text-player">Vídeos</h2>
                 </div>
