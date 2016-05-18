@@ -2,62 +2,6 @@
 define('AZEXO_THEME_NAME', 'AZEXO');
 define('AZEXO_THEME_VERSION', '1.18');
 
-define('WPLANG', 'pt_BR');
-
-add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
- 
-function custom_override_checkout_fields( $fields ) {
-    //unset($fields['billing']['billing_first_name']);
-    //unset($fields['billing']['billing_last_name']);
-    unset($fields['billing']['billing_company']);
-    unset($fields['billing']['billing_address_1']);
-    unset($fields['billing']['billing_address_2']);
-    unset($fields['billing']['billing_city']);
-    unset($fields['billing']['billing_postcode']);
-    unset($fields['billing']['billing_country']);
-    unset($fields['billing']['billing_state']);
-    unset($fields['billing']['billing_phone']);
-    unset($fields['shipping']['shipping_first_name']);
-    unset($fields['shipping']['shipping_last_name']);
-    unset($fields['shipping']['shipping_company']);
-    unset($fields['shipping']['shipping_address_1']);
-    unset($fields['shipping']['shipping_address_2']);
-    unset($fields['shipping']['shipping_city']);
-    unset($fields['shipping']['shipping_postcode']);
-    unset($fields['shipping']['shipping_country']);
-    unset($fields['shipping']['shipping_state']);
-    unset($fields['shipping']['shipping_phone']);
-    unset($fields['order']['order_comments']);
-    unset($fields['billing']['billing_address_2']);
-    unset($fields['billing']['billing_postcode']);
-    unset($fields['billing']['billing_company']);
-    unset($fields['billing']['billing_neighborhood']);
-    unset($fields['billing']['billing_number']);
-    //unset($fields['billing']['billing_email']);
-    unset($fields['billing']['billing_city']);
-    unset($fields['shipping']['shipping_address_2']);
-    unset($fields['shipping']['shipping_postcode']);
-    unset($fields['shipping']['shipping_company']);
-    unset($fields['shipping']['shipping_last_name']);
-    unset($fields['shipping']['shipping_email']);
-    unset($fields['shipping']['shipping_city']);
-    return $fields;
-}
-
-
-
-
-add_filter( 'woocommerce_add_cart_item_data', 'woo_custom_add_to_cart' );
-
-function woo_custom_add_to_cart( $cart_item_data ) {
-
-    global $woocommerce;
-    $woocommerce->cart->empty_cart();
-
-    // Do nothing with the data and return
-    return $cart_item_data;
-}
-
 function azexo_return_bytes($val) {
     $val = trim($val);
     $last = strtolower($val[strlen($val) - 1]);

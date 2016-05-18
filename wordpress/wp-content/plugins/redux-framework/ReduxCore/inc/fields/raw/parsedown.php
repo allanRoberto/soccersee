@@ -762,8 +762,7 @@ class Parsedown
 
     protected function blockReference($Line)
     {
-        # ReduxFramework added string alerting to remove themecheck error.
-        if (preg_match('/^\[(.+?)\]:[ ]*<'.'?'.'(\S+?)>?(?:[ ]+["\'(](.+)["\')])?[ ]*$/', $Line['text'], $matches))
+        if (preg_match('/^\[(.+?)\]:[ ]*<?(\S+?)>?(?:[ ]+["\'(](.+)["\')])?[ ]*$/', $Line['text'], $matches))
         {
             $id = strtolower($matches[1]);
 

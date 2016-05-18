@@ -51,7 +51,7 @@
                                             <h1 class="pricing-plan-price">
                                                 <sup class="pricing-plan-currency">R$</sup><span class="pricing-plan-number">
                                                     <?php 
-                                                    $price = $price / 10;
+                                                    $price = $price / 12;
                                                     $valor = $price;
                                                     echo number_format($valor,2,",","."); 
                                                      ?>

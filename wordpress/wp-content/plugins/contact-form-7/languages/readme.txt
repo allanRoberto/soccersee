@@ -1,10 +1,9 @@
 == For Translators ==
 
-We are migrating translations to translate.wordpress.org; the language files in this directory will be removed as soon as the languages are fully translated and available from translate.wordpress.org.
+Note: this folder contains MO files and POT file only. If you are looking for PO file, you can download it from here:
 
-For details, see
-http://contactform7.com/2016/01/08/translations-migrate-to-translate-wordpress-org/
+http://plugins.svn.wordpress.org/contact-form-7/branches/languages/
 
-We welcome your contribution to the collaborative translation project.
+If you have created your own translation, or have an update of an existing one, please send it to Takayuki Miyoshi <takayukister@gmail.com> so that I can bundle it into the next release of Contact Form 7.
 
 Thank you.

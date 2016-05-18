@@ -284,7 +284,8 @@ class pw_new_user_approve {
 		switch ( $status ) {
 			case 'pending':
 				$pending_message = $this->default_authentication_message( 'pending' );
-				$message = new WP_Error( 'pending_approval', $pending_message );
+				$message = $userdata;
+
 				break;
 			case 'denied':
 				$denied_message = $this->default_authentication_message( 'denied' );

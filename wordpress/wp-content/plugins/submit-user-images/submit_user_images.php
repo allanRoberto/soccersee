@@ -7,7 +7,6 @@ Author: Showy
 Version: 1.0
 Author URI: http://showy.com.br
 */
-
 // If this file is called directly, abort.
 define('MAX_UPLOAD_SIZE', 900000);
 define('TYPE_WHITELIST', serialize(array(
@@ -15,11 +14,7 @@ define('TYPE_WHITELIST', serialize(array(
   'image/png',
   'image/gif'
   )));
-
-
-
 add_action('init', 'sui_plugin_init');
-
 function sui_plugin_init(){
  
   $image_type_labels = array(
@@ -81,29 +76,17 @@ function sui_plugin_init(){
     'menu_position' => null,
     'supports' => array('title', 'author')
   ); 
-
   register_post_type('user_videos', $video_type_args);
-
-
 }
-
 add_shortcode('sui_form', 'sui_form_shortcode');
-
 add_shortcode('sui_form_video', 'sui_form_shortcode_video');
-
 add_shortcode('sui_table_images', 'sui_table_shortcode' );
-
 add_shortcode('sui_table_videos', 'sui_table_video_shortcode' );
-
-
 function sui_table_shortcode() {
-
   $atts = shortcode_atts(
     array(
       'id' => '',
     ), $atts );
-
-
     $args = array(
       'author' => $id,
       'post_type' => 'user_images',
@@ -135,17 +118,12 @@ function sui_table_shortcode() {
     $out .= '</form>';  
      
     return $out;
-
 }
-
 function sui_table_video_shortcode() {
-
   $atts = shortcode_atts(
     array(
       'id' => '',
     ), $atts );
-
-
     $args = array(
       'author' => $id,
       'post_type' => 'user_videos',
@@ -161,24 +139,17 @@ function sui_table_video_shortcode() {
     $out .= '<form method="post" action="">'; 
     $out .= '<div class="row">';
     foreach($user_videos->posts as $user_video){
-
       $wp_embed = new WP_Embed(); 
-
       $post_video_link = get_field('link', $user_video->ID );  
-
       $out .= $wp_embed->run_shortcode('[embed]'.$post_video_link.'[/embed]');                     
     }
     $out .= "</div>";       
     $out .= '</form>';  
      
     return $out;
-
 }
-
 function sui_form_shortcode(){
-
   global $current_user;
-
   if(!is_user_logged_in()){
    
     return '<p>Você precisa estar logado para enviar fotos.</p>';    
@@ -198,16 +169,14 @@ function sui_form_shortcode(){
  
       $user_image_data = array(
         'post_title' => 'img-'.$current_user->first_name,
-        'post_status' => 'pending',
+        'post_status' => array('publish','pending'),
         'post_author' => $current_user->ID,
         'post_type' => 'user_images'    
       );    
       if($post_id = wp_insert_post($user_image_data)){
      
         sui_process_image('sui_image_file', $post_id, 'img-'.$current_user->ID);
-
         $admin_email = get_option('admin_email');
-
         $subject = 'Foto aguardando aprovação.';
         $message = 'Uma nova foto foi inserida, <a href="'.site_url('/wp-admin/post.php?post='.$post_id.'&action=edit').'">Clique aqui</a> para aprova-la';
         $to = array($admin_email);
@@ -227,7 +196,6 @@ function sui_form_shortcode(){
       }
     }
   }
-
   if (isset( $_POST['sui_form_delete_submitted'] ) && wp_verify_nonce($_POST['sui_form_delete_submitted'], 'sui_form_delete')){
  
     if(isset($_POST['sui_image_delete_id'])){
@@ -239,16 +207,12 @@ function sui_form_shortcode(){
       }
     }
   }
-
   echo sui_get_upload_image_form($sui_image_caption = 'img-'.$current_user->ID);
  
   
 }
-
 function sui_form_shortcode_video(){
-
   global $current_user;
-
   if(!is_user_logged_in()){
    
     return '<p>Você precisa estar logado para enviar vídeos.</p>';    
@@ -258,7 +222,6 @@ function sui_form_shortcode_video(){
   if(isset( $_POST['sui_upload_video_form_submitted'] ) && wp_verify_nonce($_POST['sui_upload_video_form_submitted'], 'sui_upload_video_form') ){  
  
     $link_video = $_REQUEST['sui_video_link'];
-
    
     if($result['error']){
      
@@ -269,16 +232,14 @@ function sui_form_shortcode_video(){
  
       $user_video_data = array(
         'post_title' => 'video-'.$current_user->first_name,
-        'post_status' => 'pending',
+        'post_status' => array('publish','pending'),
         'post_author' => $current_user->ID,
         'post_type' => 'user_videos'    
       );    
       if($post_id = wp_insert_post($user_video_data)){
      
         update_field('link', $link_video, $post_id);
-
         $admin_email = get_option('admin_email');
-
         $subject = 'Vídeo aguardando aprovação.';
         $message = 'Um novo vídeo foi inserido, <a href="'.site_url('/wp-admin/post.php?post='.$post_id.'&action=edit').'">Clique aqui</a> para aprova-lo';
         $to = array($admin_email);
@@ -298,7 +259,6 @@ function sui_form_shortcode_video(){
       }
     }
   }
-
   if (isset( $_POST['sui_form_delete_video_submitted'] ) && wp_verify_nonce($_POST['sui_form_delete_video_submitted'], 'sui_form_delete_video')){
  
     if(isset($_REQUEST['sui_video_delete_id'])){
@@ -310,12 +270,10 @@ function sui_form_shortcode_video(){
       }
     }
   }
-
   echo sui_get_upload_video_form($sui_video_caption = 'video-'.$current_user->ID);
  
   
 }
-
   function count_images() {
     global $current_user;
   
@@ -327,7 +285,6 @@ function sui_form_shortcode_video(){
       case '2':
         $number_images = 5;
       break;
-
       case '3':
         $number_images = 8;
       break;    
@@ -336,7 +293,6 @@ function sui_form_shortcode_video(){
         $number_images = 13;
         break;
     }
-
     $args = array(
       'author' => $current_user->ID,
       'post_type' => 'user_images',
@@ -346,13 +302,9 @@ function sui_form_shortcode_video(){
     $user_images = new WP_Query($args);
    
     $count = $user_images->post_count;
-
     $out = $number_images - $count;
-
     return $out;
-
   }
-
   function count_videos() {
     global $current_user;
   
@@ -364,7 +316,6 @@ function sui_form_shortcode_video(){
       case '2':
         $number_videos = 0;
       break;
-
       case '3':
         $number_videos = 2;
       break;    
@@ -373,7 +324,6 @@ function sui_form_shortcode_video(){
         $number_videos = 4;
         break;
     }
-
       $args = array(
       'author' => $current_user->ID,
       'post_type' => 'user_videos',
@@ -383,13 +333,9 @@ function sui_form_shortcode_video(){
     $user_videos = new WP_Query($args);
    
     $count = $user_videos->post_count;
-
     $out = $number_videos - $count;
-
     return $out;
-
   }
-
   function sui_get_upload_image_form($sui_image_caption = ''){
     ?>
       <div class="container grid-images">
@@ -403,10 +349,8 @@ function sui_form_shortcode_video(){
             <form id="sui_upload_image_form" method="post" action="" enctype="multipart/form-data">
 
             <?php 
-
                 $count = count_images();
                 if(!$count == 0) {
-
               ?>
               <?php wp_nonce_field('sui_upload_image_form', 'sui_upload_image_form_submitted'); ?>
               <div class="clearfix"></div>
@@ -440,7 +384,6 @@ function sui_form_shortcode_video(){
     </div>
 
     <?php 
-
  
     /* $out = '<form id="sui_upload_image_form" method="post" action="" enctype="multipart/form-data">';
     $out .= '<h2>Envie suas fotos:</h2>';
@@ -453,7 +396,6 @@ function sui_form_shortcode_video(){
     $out .= '</form><div class="clearfix"></div>';*/
    
   }
-
   function sui_get_upload_video_form($sui_image_caption = ''){
     ?>
       <div class="container grid-images">
@@ -467,10 +409,8 @@ function sui_form_shortcode_video(){
             <form id="sui_upload_video_form" method="post">
 
             <?php 
-
                 $count = count_videos();
                 if(!$count == 0) {
-
               ?>
               <?php wp_nonce_field('sui_upload_video_form', 'sui_upload_video_form_submitted'); ?>
               <div class="clearfix"></div>
@@ -506,12 +446,9 @@ function sui_form_shortcode_video(){
     <?php 
    
   }
-
-
   function sui_get_user_images_table(){
     
     global $current_user;
-
     $args = array(
       'author' => $current_user->ID,
       'post_type' => 'user_images',
@@ -551,11 +488,9 @@ function sui_form_shortcode_video(){
     return $out;
  
   }
-
   function sui_get_user_videos_table(){
     
     global $current_user;
-
     $args = array(
       'author' => $current_user->ID,
       'post_type' => 'user_videos',
@@ -574,11 +509,8 @@ function sui_form_shortcode_video(){
      
     $out .= '<div class="row">';
     foreach($user_videos->posts as $user_video){
-
       $wp_embed = new WP_Embed(); 
-
       $post_video_link = get_field('link', $user_video->ID );  
-
       $out .= wp_nonce_field('sui_video_delete_' . $user_video->ID, 'sui_video_delete_id_' . $user_video->ID, false); 
           
       $out .= '<div class="col-lg-4 col-xs-12 grid-image">';
@@ -598,7 +530,6 @@ function sui_form_shortcode_video(){
     return $out;
     
   }
-
   function sui_delete_user_images($images_to_delete){
  
     $images_deleted = 0;
@@ -623,7 +554,6 @@ function sui_form_shortcode_video(){
     return $images_deleted;
  
 }
-
 function sui_delete_user_videos($videos_to_delete){
  
     $videos_deleted = 0;
@@ -643,7 +573,6 @@ function sui_delete_user_videos($videos_to_delete){
    
     return $videos_deleted; 
 }
-
 function sui_parse_file_errors($file = '', $image_caption){
  
   $result = array();
@@ -684,7 +613,6 @@ function sui_parse_file_errors($file = '', $image_caption){
   return $result;
  
 }
-
 function sui_process_image($file, $post_id, $caption){
   
   require_once(ABSPATH . "wp-admin" . '/includes/image.php');
@@ -705,7 +633,6 @@ function sui_process_image($file, $post_id, $caption){
   return $attachment_id;
  
 }
-
 function sui_process_video($file, $post_id, $caption){
   
   require_once(ABSPATH . "wp-admin" . '/includes/image.php');

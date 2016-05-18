@@ -2,7 +2,6 @@
 global $wpdb, $pmpro_msg, $pmpro_msgt, $current_user;
 
 $pmpro_levels = pmpro_getAllLevels(false, true);
-
 $pmpro_level_order = pmpro_getOption('level_order');
 
 if(!empty($pmpro_level_order))
@@ -60,18 +59,16 @@ if($pmpro_msg)
                     <footer class="pricing-plan-footer column-flush span-3">
                     	<?php if(empty($current_user->membership_level->ID)) { ?>
 								<a class="button btn-regular btn-regular pricing-button"  data-vc-tabs="" data-vc-container=".vc_tta" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Select', 'pmpro');?></a>
-							<?php echo do_shortcode('[add_to_cart id="1274"]' );} elseif ( !$current_level ) { ?>                	
+							<?php } elseif ( !$current_level ) { ?>                	
 								<a class="button btn-regular btn-regular pricing-button"  data-vc-tabs="" data-vc-container=".vc_tta" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Select', 'pmpro');?></a>
-							<?php echo do_shortcode('[add_to_cart id="1274"]' );} elseif($current_level) { ?>      
+							<?php } elseif($current_level) { ?>      
 								
 								<?php
 									//if it's a one-time-payment level, offer a link to renew				
 									if( pmpro_isLevelExpiringSoon( $current_user->membership_level) && $current_user->membership_level->allow_signups ) {
 										?>
 											<a class="button btn-regular btn-regular pricing-button"  data-vc-tabs="" data-vc-container=".vc_tta" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Renew', 'pmpro');?></a>
-
 										<?php
-										echo do_shortcode('[add_to_cart id="1274"]' );
 									} else {
 										?>
 											<a class="button btn-regular btn-regular pricing-button disabled" href="<?php echo pmpro_url("account")?>"><?php _e('Your&nbsp;Level', 'pmpro');?></a>

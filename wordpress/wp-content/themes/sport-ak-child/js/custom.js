@@ -1,28 +1,64 @@
 (function($) {
 	$(document).ready(function(){
-		$('.load-states').on('change', function(){
-			alert('Carregando cidades ...')
-			$city = $('.load-states').closest();
-			console.log($city);
-		});
+		
 		$('.input-cpf').mask('999.999.999-99');
 		$('.input-cep').mask('99999-999');
 		$('.input-number').mask('999');
 		$('.input-date').mask('99/99/9999', {placeholder : 'dd/mm/aaaa'});
 
-		$('.input-link-video').change(function(){
-			url = $(this).val();
+		$('.form-search-users').submit(function(event){
 
-		    iframe = '<iframe width="420" height="315" src="'+url+'"></iframe>';
 
-			$(this).after($('div')).html(iframe);
+			$('.result-header').addClass('loading-user');
+			$('.title-search').html('Buscando resultados ...');
 
-			alert(iframe);
-		})
+			$('.result-search').html('');
+
+			var target_offset = $(".result-header").offset();
+       		var target_top = target_offset.top - 190;
+        	$('html, body').animate({ scrollTop: target_top }, 900);
+
+			event.preventDefault();
+
+			$.ajax({
+				url : MyAjax.ajax_url,
+				dataType: 'json',
+				method: 'POST', 
+				data : $(this).serialize()
+			}).done(function(data) {
+				$('.title-search').html(data.title_text);
+				$('.result-header').removeClass('loading-user');
+
+				$.each(data.users, function (index, value){
+					var html_user  = '<div class="filtered">';
+						html_user += '<div class="entry player-mini azsc_player type-azsc_player has-post-thumbnail hentry position-defender">';
+						html_user  += '<div class="entry-thumbnail">';
+						html_user  += '<a href="'+value.link_user+'">';
+                        html_user  += '<div class="image" style="background-image: url('+value.avatar_user+'); height:300px;" data-width="300" data-height="300">';
+                        html_user  += '</div>';
+                        html_user  += '</a>';
+                        html_user  += '</div>';
+                        html_user  += '<div class="entry-data">';
+                        html_user  += '<div class="entry-header">';
+                        html_user  += '<h2 class="entry-title">';
+                        html_user  += '<a href="'+value.link_user+'">'+value.first_name+'</a>';
+                        html_user  += '</h2>';
+                        html_user  += '<div class="entry-meta">';
+                        html_user  += '<div class="player-position">'+value.position_user+'</div>';
+                        html_user  += '</div></div></div></div></div>';
+
+					$('.result-search').append(html_user);
+				})
+
+			})
+		});
+
+
+
 	});
 
 
-var multipleSupport = typeof $('<input/>')[0].multiple !== 'undefined',
+	var multipleSupport = typeof $('<input/>')[0].multiple !== 'undefined',
 		      isIE = /msie/i.test( navigator.userAgent );
 
 		  $.fn.customFile = function() {
@@ -143,6 +179,6 @@ var multipleSupport = typeof $('<input/>')[0].multiple !== 'undefined',
 
 		    });
 		  }
-	
 	$('input[type=file]').customFile();
+
 })(jQuery);

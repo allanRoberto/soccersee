@@ -18,6 +18,11 @@ function azexo_custom_scripts() {
     wp_enqueue_script('custom-js');
     wp_register_script('maskinput-js', get_template_directory_uri() . '-child/js/jquery.maskedinput.min.js', array('jquery'), AZEXO_THEME_VERSION, true);
     wp_enqueue_script('maskinput-js');
+
+    wp_localize_script('custom-js','MyAjax',array( 
+    'ajax_url' => admin_url( 'admin-ajax.php' ),
+    'security' => wp_create_nonce('handle_login')
+	));
 }
 
 add_action( 'wp_ajax_load_files', 'load_files' );
@@ -54,16 +59,83 @@ function load_cities() {
 add_shortcode('user_search', 'search_user_shortcode');
 
 
-function search_user_shortcode() {
+function search_user_shortcode($atts) {
+	extract(shortcode_atts(array(
+        'post' => false,
+    ), $atts));
 
-	 echo user_search_form();
+	 echo user_search_form($post);
 	}
 
-function user_search_form() {
+add_shortcode('user_search_list', 'search_user_list_shortcode');
 
+function search_user_list_shortcode() {
+	$args = array(
+		'role' => 'customer',
+		'meta_key' => 'pw_user_status', 
+        'meta_value' => 'approved',
+	);
+
+	$user_query = new WP_User_Query($args);
+
+	$users = $user_query->get_results();
+
+	if(!empty($users)) {
+		
+		$total_users = $user_query->get_total();
+
+		$content = "Pesquisa realizada ".$total_users." resultado(s) encontrado(s)";
+
+		foreach ($users as $key => $user) { 
+
+			$user_meta[$key]['id'] = $user->ID;
+			$user_meta[$key]['first_name'] = $user->first_name." ".$user->last_name;
+			$user_meta[$key]['position_user'] = get_user_meta($user->ID, 'user-first-position', true);
+			$user_meta[$key]['avatar_user'] = site_url('wp-content'.get_user_meta($user->ID, 'user_avatar', true));
+			$user_meta[$key]['link_user'] = get_permalink(1139).'?user_id='.$user->ID;
+				ob_start();
+			?>
+
+			            <div class="filtered">
+							<div class="entry player-mini azsc_player type-azsc_player has-post-thumbnail hentry position-defender">
+								<div class="entry-thumbnail">'
+									 <a href="<?php echo $user_meta[$key]['link_user']; ?>">
+				                         <div class="image" style="background-image: url('<?php echo $user_meta[$key]['avatar_user']?>'); height:300px;" data-width="300" data-height="300">
+				                         </div>
+			                         </a>
+			                    </div>
+			                    <div class="entry-data">
+			                        <div class="entry-header">
+			                        	<h2 class="entry-title">
+			                         		<a href="echo $user_meta[$key]['link_user'];"><?php echo $user_meta[$key]['first_name'];?></a>
+			                         	</h2>
+			                         	<div class="entry-meta">
+			                         		<div class="player-position"><?php echo $user_meta[$key]['position_user'] ?></div>
+			                         	</div>
+			                         </div>
+		                         </div>
+	                         </div>
+                         </div>
+		<?php }
+		$content .= ob_get_contents();
+		ob_flush();
+	} else {
+		$content = '<h1 class="title-search">Nenhum jogador encontrado</h1>';
+	}
+
+	return $content;
+}
+
+function user_search_form($post) {
+		if($post) {
+			$class = 'form-search-users-noajax';
+		}else {
+			$class = 'form-search-users';
+		}
 	ob_start(); ?>
-	<form id="user_search_form" method="GET" action="<?php echo get_permalink(1155); ?>">
-	<?php wp_nonce_field('user_search_form', 'user_search_form_submitted');?>
+	<form id="user_search_form" class="<?php echo $class; ?>" action="<?php echo get_permalink(1155); ?>" method="post">
+	<input type="hidden" name="action" value="search_users" />
+	<?php wp_nonce_field('user_search_form_ajax', 'user_search_form_submitted');?>
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="entry-title-form">Pesquisa de jogadores</h1>
@@ -81,7 +153,8 @@ function user_search_form() {
 					Data de nascimento entre : 
 				</label>
 				<select name="date_of_birth_min_user">
-					<option value="1980">1980</option>
+					<option value="">Selecione ...</option>
+					<option value="1981">1980</option>
 					<option value="1981">1981</option>
 					<option value="1982">1982</option>
 					<option value="1983">1983</option>
@@ -125,7 +198,8 @@ function user_search_form() {
 					Até : 
 				</label>
 				<select name="date_of_birth_max_user">
-					<option value="1980">1980</option>
+					<option value="">Selecione ...</option>
+					<option value="1981">1980</option>
 					<option value="1981">1981</option>
 					<option value="1982">1982</option>
 					<option value="1983">1983</option>
@@ -171,262 +245,262 @@ function user_search_form() {
 					País :
 				</label>
 					<select name="state_user">
-						<option>Afeganistão</option>
-						<option>África do Sul</option>
-						<option>Akrotiri</option>
-						<option>Albânia</option>
-						<option>Alemanha</option>
-						<option>Andorra</option>
-						<option>Angola</option>
-						<option>Anguila</option>
-						<option>Antárctida</option>
-						<option>Antígua e Barbuda</option>
-						<option>Antilhas Neerlandesas</option>
-						<option>Arábia Saudita</option>
-						<option>Arctic Ocean</option>
-						<option>Argélia</option>
-						<option>Argentina</option>
-						<option>Arménia</option>
-						<option>Aruba</option>
-						<option>Ashmore and Cartier Islands</option>
-						<option>Atlantic Ocean</option>
-						<option>Austrália</option>
-						<option>Áustria</option>
-						<option>Azerbaijão</option>
-						<option>Baamas</option>
-						<option>Bangladeche</option>
-						<option>Barbados</option>
-						<option>Barém</option>
-						<option>Bélgica</option>
-						<option>Belize</option>
-						<option>Benim</option>
-						<option>Bermudas</option>
-						<option>Bielorrússia</option>
-						<option>Birmânia</option>
-						<option>Bolívia</option>
-						<option>Bósnia e Herzegovina</option>
-						<option>Botsuana</option>
-						<option selected>Brasil</option>
-						<option>Brunei</option>
-						<option>Bulgária</option>
-						<option>Burquina Faso</option>
-						<option>Burúndi</option>
-						<option>Butão</option>
-						<option>Cabo Verde</option>
-						<option>Camarões</option>
-						<option>Camboja</option>
-						<option>Canadá</option>
-						<option>Catar</option>
-						<option>Cazaquistão</option>
-						<option>Chade</option>
-						<option>Chile</option>
-						<option>China</option>
-						<option>Chipre</option>
-						<option>Clipperton Island</option>
-						<option>Colômbia</option>
-						<option>Comores</option>
-						<option>Congo-Brazzaville</option>
-						<option>Congo-Kinshasa</option>
-						<option>Coral Sea Islands</option>
-						<option>Coreia do Norte</option>
-						<option>Coreia do Sul</option>
-						<option>Costa do Marfim</option>
-						<option>Costa Rica</option>
-						<option>Croácia</option>
-						<option>Cuba</option>
-						<option>Dhekelia</option>
-						<option>Dinamarca</option>
-						<option>Domínica</option>
-						<option>Egipto</option>
-						<option>Emiratos Árabes Unidos</option>
-						<option>Equador</option>
-						<option>Eritreia</option>
-						<option>Eslováquia</option>
-						<option>Eslovénia</option>
-						<option>Espanha</option>
-						<option>Estados Unidos</option>
-						<option>Estónia</option>
-						<option>Etiópia</option>
-						<option>Faroé</option>
-						<option>Fiji</option>
-						<option>Filipinas</option>
-						<option>Finlândia</option>
-						<option>França</option>
-						<option>Gabão</option>
-						<option>Gâmbia</option>
-						<option>Gana</option>
-						<option>Gaza Strip</option>
-						<option>Geórgia</option>
-						<option>Geórgia do Sul e Sandwich do Sul</option>
-						<option>Gibraltar</option>
-						<option>Granada</option>
-						<option>Grécia</option>
-						<option>Gronelândia</option>
-						<option>Guame</option>
-						<option>Guatemala</option>
-						<option>Guernsey</option>
-						<option>Guiana</option>
-						<option>Guiné</option>
-						<option>Guiné Equatorial</option>
-						<option>Guiné-Bissau</option>
-						<option>Haiti</option>
-						<option>Honduras</option>
-						<option>Hong Kong</option>
-						<option>Hungria</option>
-						<option>Iémen</option>
-						<option>Ilha Bouvet</option>
-						<option>Ilha do Natal</option>
-						<option>Ilha Norfolk</option>
-						<option>Ilhas Caimão</option>
-						<option>Ilhas Cook</option>
-						<option>Ilhas dos Cocos</option>
-						<option>Ilhas Falkland</option>
-						<option>Ilhas Heard e McDonald</option>
-						<option>Ilhas Marshall</option>
-						<option>Ilhas Salomão</option>
-						<option>Ilhas Turcas e Caicos</option>
-						<option>Ilhas Virgens Americanas</option>
-						<option>Ilhas Virgens Britânicas</option>
-						<option>Índia</option>
-						<option>Indian Ocean</option>
-						<option>Indonésia</option>
-						<option>Irão</option>
-						<option>Iraque</option>
-						<option>Irlanda</option>
-						<option>Islândia</option>
-						<option>Israel</option>
-						<option>Itália</option>
-						<option>Jamaica</option>
-						<option>Jan Mayen</option>
-						<option>Japão</option>
-						<option>Jersey</option>
-						<option>Jibuti</option>
-						<option>Jordânia</option>
-						<option>Kuwait</option>
-						<option>Laos</option>
-						<option>Lesoto</option>
-						<option>Letónia</option>
-						<option>Líbano</option>
-						<option>Libéria</option>
-						<option>Líbia</option>
-						<option>Listenstaine</option>
-						<option>Lituânia</option>
-						<option>Luxemburgo</option>
-						<option>Macau</option>
-						<option>Macedónia</option>
-						<option>Madagáscar</option>
-						<option>Malásia</option>
-						<option>Malávi</option>
-						<option>Maldivas</option>
-						<option>Mali</option>
-						<option>Malta</option>
-						<option>Man, Isle of</option>
-						<option>Marianas do Norte</option>
-						<option>Marrocos</option>
-						<option>Maurícia</option>
-						<option>Mauritânia</option>
-						<option>Mayotte</option>
-						<option>México</option>
-						<option>Micronésia</option>
-						<option>Moçambique</option>
-						<option>Moldávia</option>
-						<option>Mónaco</option>
-						<option>Mongólia</option>
-						<option>Monserrate</option>
-						<option>Montenegro</option>
-						<option>Mundo</option>
-						<option>Namíbia</option>
-						<option>Nauru</option>
-						<option>Navassa Island</option>
-						<option>Nepal</option>
-						<option>Nicarágua</option>
-						<option>Níger</option>
-						<option>Nigéria</option>
-						<option>Niue</option>
-						<option>Noruega</option>
-						<option>Nova Caledónia</option>
-						<option>Nova Zelândia</option>
-						<option>Omã</option>
-						<option>Pacific Ocean</option>
-						<option>Países Baixos</option>
-						<option>Palau</option>
-						<option>Panamá</option>
-						<option>Papua-Nova Guiné</option>
-						<option>Paquistão</option>
-						<option>Paracel Islands</option>
-						<option>Paraguai</option>
-						<option>Peru</option>
-						<option>Pitcairn</option>
-						<option>Polinésia Francesa</option>
-						<option>Polónia</option>
-						<option>Porto Rico</option>
-						<option>Portugal</option>
-						<option>Quénia</option>
-						<option>Quirguizistão</option>
-						<option>Quiribáti</option>
-						<option>Reino Unido</option>
-						<option>República Centro-Africana</option>
-						<option>República Checa</option>
-						<option>República Dominicana</option>
-						<option>Roménia</option>
-						<option>Ruanda</option>
-						<option>Rússia</option>
-						<option>Salvador</option>
-						<option>Samoa</option>
-						<option>Samoa Americana</option>
-						<option>Santa Helena</option>
-						<option>Santa Lúcia</option>
-						<option>São Cristóvão e Neves</option>
-						<option>São Marinho</option>
-						<option>São Pedro e Miquelon</option>
-						<option>São Tomé e Príncipe</option>
-						<option>São Vicente e Granadinas</option>
-						<option>Sara Ocidental</option>
-						<option>Seicheles</option>
-						<option>Senegal</option>
-						<option>Serra Leoa</option>
-						<option>Sérvia</option>
-						<option>Singapura</option>
-						<option>Síria</option>
-						<option>Somália</option>
-						<option>Southern Ocean</option>
-						<option>Spratly Islands</option>
-						<option>Sri Lanca</option>
-						<option>Suazilândia</option>
-						<option>Sudão</option>
-						<option>Suécia</option>
-						<option>Suíça</option>
-						<option>Suriname</option>
-						<option>Svalbard e Jan Mayen</option>
-						<option>Tailândia</option>
-						<option>Taiwan</option>
-						<option>Tajiquistão</option>
-						<option>Tanzânia</option>
-						<option>Território Britânico do Oceano Índico</option>
-						<option>Territórios Austrais Franceses</option>
-						<option>Timor Leste</option>
-						<option>Togo</option>
-						<option>Tokelau</option>
-						<option>Tonga</option>
-						<option>Trindade e Tobago</option>
-						<option>Tunísia</option>
-						<option>Turquemenistão</option>
-						<option>Turquia</option>
-						<option>Tuvalu</option>
-						<option>Ucrânia</option>
-						<option>Uganda</option>
-						<option>União Europeia</option>
-						<option>Uruguai</option>
-						<option>Usbequistão</option>
-						<option>Vanuatu</option>
-						<option>Vaticano</option>
-						<option>Venezuela</option>
-						<option>Vietname</option>
-						<option>Wake Island</option>
-						<option>Wallis e Futuna</option>
-						<option>West Bank</option>
-						<option>Zâmbia</option>
-						<option>Zimbabué</option>					
+						<option value"">Afeganistão</option>
+						<option value"">África do Sul</option>
+						<option value"">Akrotiri</option>
+						<option value"">Albânia</option>
+						<option value"">Alemanha</option>
+						<option value"">Andorra</option>
+						<option value"">Angola</option>
+						<option value"">Anguila</option>
+						<option value"">Antárctida</option>
+						<option value"">Antígua e Barbuda</option>
+						<option value"">Antilhas Neerlandesas</option>
+						<option value"">Arábia Saudita</option>
+						<option value"">Arctic Ocean</option>
+						<option value"">Argélia</option>
+						<option value"">Argentina</option>
+						<option value"">Arménia</option>
+						<option value"">Aruba</option>
+						<option value"">Ashmore and Cartier Islands</option>
+						<option value"">Atlantic Ocean</option>
+						<option value"">Austrália</option>
+						<option value"">Áustria</option>
+						<option value"">Azerbaijão</option>
+						<option value"">Baamas</option>
+						<option value"">Bangladeche</option>
+						<option value"">Barbados</option>
+						<option value"">Barém</option>
+						<option value"">Bélgica</option>
+						<option value"">Belize</option>
+						<option value"">Benim</option>
+						<option value"">Bermudas</option>
+						<option value"">Bielorrússia</option>
+						<option value"">Birmânia</option>
+						<option value"">Bolívia</option>
+						<option value"">Bósnia e Herzegovina</option>
+						<option value"">Botsuana</option>
+						<option value"" selected>Brasil</option>
+						<option value"">Brunei</option>
+						<option value"">Bulgária</option>
+						<option value"">Burquina Faso</option>
+						<option value"">Burúndi</option>
+						<option value"">Butão</option>
+						<option value"">Cabo Verde</option>
+						<option value"">Camarões</option>
+						<option value"">Camboja</option>
+						<option value"">Canadá</option>
+						<option value"">Catar</option>
+						<option value"">Cazaquistão</option>
+						<option value"">Chade</option>
+						<option value"">Chile</option>
+						<option value"">China</option>
+						<option value"">Chipre</option>
+						<option value"">Clipperton Island</option>
+						<option value"">Colômbia</option>
+						<option value"">Comores</option>
+						<option value"">Congo-Brazzaville</option>
+						<option value"">Congo-Kinshasa</option>
+						<option value"">Coral Sea Islands</option>
+						<option value"">Coreia do Norte</option>
+						<option value"">Coreia do Sul</option>
+						<option value"">Costa do Marfim</option>
+						<option value"">Costa Rica</option>
+						<option value"">Croácia</option>
+						<option value"">Cuba</option>
+						<option value"">Dhekelia</option>
+						<option value"">Dinamarca</option>
+						<option value"">Domínica</option>
+						<option value"">Egipto</option>
+						<option value"">Emiratos Árabes Unidos</option>
+						<option value"">Equador</option>
+						<option value"">Eritreia</option>
+						<option value"">Eslováquia</option>
+						<option value"">Eslovénia</option>
+						<option value"">Espanha</option>
+						<option value"">Estados Unidos</option>
+						<option value"">Estónia</option>
+						<option value"">Etiópia</option>
+						<option value"">Faroé</option>
+						<option value"">Fiji</option>
+						<option value"">Filipinas</option>
+						<option value"">Finlândia</option>
+						<option value"">França</option>
+						<option value"">Gabão</option>
+						<option value"">Gâmbia</option>
+						<option value"">Gana</option>
+						<option value"">Gaza Strip</option>
+						<option value"">Geórgia</option>
+						<option value"">Geórgia do Sul e Sandwich do Sul</option>
+						<option value"">Gibraltar</option>
+						<option value"">Granada</option>
+						<option value"">Grécia</option>
+						<option value"">Gronelândia</option>
+						<option value"">Guame</option>
+						<option value"">Guatemala</option>
+						<option value"">Guernsey</option>
+						<option value"">Guiana</option>
+						<option value"">Guiné</option>
+						<option value"">Guiné Equatorial</option>
+						<option value"">Guiné-Bissau</option>
+						<option value"">Haiti</option>
+						<option value"">Honduras</option>
+						<option value"">Hong Kong</option>
+						<option value"">Hungria</option>
+						<option value"">Iémen</option>
+						<option value"">Ilha Bouvet</option>
+						<option value"">Ilha do Natal</option>
+						<option value"">Ilha Norfolk</option>
+						<option value"">Ilhas Caimão</option>
+						<option value"">Ilhas Cook</option>
+						<option value"">Ilhas dos Cocos</option>
+						<option value"">Ilhas Falkland</option>
+						<option value"">Ilhas Heard e McDonald</option>
+						<option value"">Ilhas Marshall</option>
+						<option value"">Ilhas Salomão</option>
+						<option value"">Ilhas Turcas e Caicos</option>
+						<option value"">Ilhas Virgens Americanas</option>
+						<option value"">Ilhas Virgens Britânicas</option>
+						<option value"">Índia</option>
+						<option value"">Indian Ocean</option>
+						<option value"">Indonésia</option>
+						<option value"">Irão</option>
+						<option value"">Iraque</option>
+						<option value"">Irlanda</option>
+						<option value"">Islândia</option>
+						<option value"">Israel</option>
+						<option value"">Itália</option>
+						<option value"">Jamaica</option>
+						<option value"">Jan Mayen</option>
+						<option value"">Japão</option>
+						<option value"">Jersey</option>
+						<option value"">Jibuti</option>
+						<option value"">Jordânia</option>
+						<option value"">Kuwait</option>
+						<option value"">Laos</option>
+						<option value"">Lesoto</option>
+						<option value"">Letónia</option>
+						<option value"">Líbano</option>
+						<option value"">Libéria</option>
+						<option value"">Líbia</option>
+						<option value"">Listenstaine</option>
+						<option value"">Lituânia</option>
+						<option value"">Luxemburgo</option>
+						<option value"">Macau</option>
+						<option value"">Macedónia</option>
+						<option value"">Madagáscar</option>
+						<option value"">Malásia</option>
+						<option value"">Malávi</option>
+						<option value"">Maldivas</option>
+						<option value"">Mali</option>
+						<option value"">Malta</option>
+						<option value"">Man, Isle of</option>
+						<option value"">Marianas do Norte</option>
+						<option value"">Marrocos</option>
+						<option value"">Maurícia</option>
+						<option value"">Mauritânia</option>
+						<option value"">Mayotte</option>
+						<option value"">México</option>
+						<option value"">Micronésia</option>
+						<option value"">Moçambique</option>
+						<option value"">Moldávia</option>
+						<option value"">Mónaco</option>
+						<option value"">Mongólia</option>
+						<option value"">Monserrate</option>
+						<option value"">Montenegro</option>
+						<option value"">Mundo</option>
+						<option value"">Namíbia</option>
+						<option value"">Nauru</option>
+						<option value"">Navassa Island</option>
+						<option value"">Nepal</option>
+						<option value"">Nicarágua</option>
+						<option value"">Níger</option>
+						<option value"">Nigéria</option>
+						<option value"">Niue</option>
+						<option value"">Noruega</option>
+						<option value"">Nova Caledónia</option>
+						<option value"">Nova Zelândia</option>
+						<option value"">Omã</option>
+						<option value"">Pacific Ocean</option>
+						<option value"">Países Baixos</option>
+						<option value"">Palau</option>
+						<option value"">Panamá</option>
+						<option value"">Papua-Nova Guiné</option>
+						<option value"">Paquistão</option>
+						<option value"">Paracel Islands</option>
+						<option value"">Paraguai</option>
+						<option value"">Peru</option>
+						<option value"">Pitcairn</option>
+						<option value"">Polinésia Francesa</option>
+						<option value"">Polónia</option>
+						<option value"">Porto Rico</option>
+						<option value"">Portugal</option>
+						<option value"">Quénia</option>
+						<option value"">Quirguizistão</option>
+						<option value"">Quiribáti</option>
+						<option value"">Reino Unido</option>
+						<option value"">República Centro-Africana</option>
+						<option value"">República Checa</option>
+						<option value"">República Dominicana</option>
+						<option value"">Roménia</option>
+						<option value"">Ruanda</option>
+						<option value"">Rússia</option>
+						<option value"">Salvador</option>
+						<option value"">Samoa</option>
+						<option value"">Samoa Americana</option>
+						<option value"">Santa Helena</option>
+						<option value"">Santa Lúcia</option>
+						<option value"">São Cristóvão e Neves</option>
+						<option value"">São Marinho</option>
+						<option value"">São Pedro e Miquelon</option>
+						<option value"">São Tomé e Príncipe</option>
+						<option value"">São Vicente e Granadinas</option>
+						<option value"">Sara Ocidental</option>
+						<option value"">Seicheles</option>
+						<option value"">Senegal</option>
+						<option value"">Serra Leoa</option>
+						<option value"">Sérvia</option>
+						<option value"">Singapura</option>
+						<option value"">Síria</option>
+						<option value"">Somália</option>
+						<option value"">Southern Ocean</option>
+						<option value"">Spratly Islands</option>
+						<option value"">Sri Lanca</option>
+						<option value"">Suazilândia</option>
+						<option value"">Sudão</option>
+						<option value"">Suécia</option>
+						<option value"">Suíça</option>
+						<option value"">Suriname</option>
+						<option value"">Svalbard e Jan Mayen</option>
+						<option value"">Tailândia</option>
+						<option value"">Taiwan</option>
+						<option value"">Tajiquistão</option>
+						<option value"">Tanzânia</option>
+						<option value"">Território Britânico do Oceano Índico</option>
+						<option value"">Territórios Austrais Franceses</option>
+						<option value"">Timor Leste</option>
+						<option value"">Togo</option>
+						<option value"">Tokelau</option>
+						<option value"">Tonga</option>
+						<option value"">Trindade e Tobago</option>
+						<option value"">Tunísia</option>
+						<option value"">Turquemenistão</option>
+						<option value"">Turquia</option>
+						<option value"">Tuvalu</option>
+						<option value"">Ucrânia</option>
+						<option value"">Uganda</option>
+						<option value"">União Europeia</option>
+						<option value"">Uruguai</option>
+						<option value"">Usbequistão</option>
+						<option value"">Vanuatu</option>
+						<option value"">Vaticano</option>
+						<option value"">Venezuela</option>
+						<option value"">Vietname</option>
+						<option value"">Wake Island</option>
+						<option value"">Wallis e Futuna</option>
+						<option value"">West Bank</option>
+						<option value"">Zâmbia</option>
+						<option value"">Zimbabué</option>					
 					</select>
 				</label>
 			</div>
@@ -464,5 +538,122 @@ function user_search_form() {
   }
 
 
+add_action( 'wp_ajax_search_users', 'search_users_ajax' );
+add_action( 'wp_ajax_nopriv_search_users', 'search_users_ajax' );
+
+function search_users_ajax() {
+
+	$user_name = $_REQUEST['name_user']; 
+	$position_user = $_REQUEST['position_user'];
+	$user_nationality = $_REQUEST['user-nationality'];
+
+
+	if($position_user != '') {
+		$position_user_array = 
+					array(
+			    		'key'     => 'user-first-position',
+			    		'value'   => $position_user,
+			    		'compare' => '='    
+			    	);
+			    	array(
+			    		'key'     => 'user-second-position',
+			    		'value'   => $position_user,
+			    		'compare' => '='    
+			    	);
+	}else {
+		$position_user_array = '';
+	}
+
+	if($user_nationality != '') {
+		$position_user_array = 
+					array(
+			    		'key'     => 'user-nationality',
+			    		'value'   => $user_nationality,
+			    		'compare' => '='    
+			    	);
+	}else {
+		$user_nationality_array = '';
+	}
+
+
+	$args = array(
+			'role' => 'customer',
+			'search' => '*'.esc_attr( $user_name ).'*',
+    		'meta_query' => 
+    		array(
+		   		'relation' => 'OR',
+			    $position_user_array,
+			    ), 
+			'fields' => 'all',
+			);
+			
+
+	$user_query = new WP_User_Query($args);
+
+	$users = $user_query->get_results();
+
+	if(!empty($users)) {
+		
+		$total_users = $user_query->get_total();
+
+		$title_text = "Pesquisa realizada ".$total_users." resultado(s) encontrado(s)";
+
+		foreach ($users as $key => $user) { 
+			$user_meta[$key]['id'] = $user->ID;
+			$user_meta[$key]['first_name'] = $user->first_name." ".$user->last_name;
+			$user_meta[$key]['position_user'] = get_user_meta($user->ID, 'user-first-position', true);
+			$user_meta[$key]['avatar_user'] = site_url('wp-content'.get_user_meta($user->ID, 'user_avatar', true));
+			$user_meta[$key]['link_user'] = get_permalink(1139).'?user_id='.$user->ID;
+		}
+
+	} else {
+		$title_text = "Nenhum jogador encontrado";
+	}
+
+
+	$result = array(
+			'title_text' => $title_text, 
+			'users' => $user_meta
+			);
+
+	echo json_encode($result);
+	
+	wp_die();
+}
+
+
+add_shortcode('user_approval', 'user_approval_shortcode');
+
+function user_approval_shortcode() {
+
+		if(is_user_logged_in()) {
+
+			global $current_user;
+			
+			$user_id = $current_user->id();
+			
+			$status = get_user_meta( $user_id, 'pw_user_status', true );
+
+				if ( empty( $status ) ) {
+					$status = 'approved';
+				}
+
+				switch ( $status ) {
+				case 'pending':
+					
+					$message = '<p class="message-post">Seu cadastro ainda não foi aprovado, mas você pode continuar preenchendo seu perfil, a aprovação ocorrerá dentro de 72 horas.<br>Seu perfil aparecerá nas pesquisas após a aprovação.</p>';
+					break;
+
+				case 'denied':
+					
+					$message = '<p class="message-post">Seu cadastro foi cancelado, por favor entre em contato conosco.</p>';
+					break;
+				case 'approved':
+					$message = '';
+					break;
+				}
+				return $message;
+		}
+	}
 
 

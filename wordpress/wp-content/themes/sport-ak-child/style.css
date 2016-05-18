@@ -3151,29 +3151,26 @@ ul.table-img li img {
   width: 100%;
   padding: 20px 5%;
   margin:auto;
-  background: url('img/bg-form-search.png')  #fdbd00;
-  border-top: 4px solid rgba(54, 53, 51, 0.9);
-  border-bottom: 4px solid rgba(54, 53, 51, 0.9);
-  background-size:cover;
-
 }
 
 #user_search_form label {
-  color: #fff;
-  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 0px;
 }
 
 #user_search_form input[type="text"], #user_search_form select {
-  border: 2px solid rgba(54, 53, 51, 0.4) !important;
+  border: 1px solid rgba(54, 53, 51, 0.4) !important;
   width: 100%;
   color: #666;
+  border-radius: 0px !important;
+  margin-bottom:10px;
 }
 
 .entry-title-form {
   text-transform: uppercase;
   color: #666666;
   font-family: 'Oswald', sans-serif;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid rgba(54, 53, 51, 0.4);
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
@@ -3485,10 +3482,38 @@ iframe {
   margin-top: 80px;
 }
 
-.color-white .entry-title {
+.color-white .about-team .entry-title {
   color: #fff !important;
 }
 
 .about-team .entry-title {
   color: #ffc722 !important;
+}
+
+.get-in-touch p {
+  display: table;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.loading-user:after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  display: table;
+  background: url(img/ring-alt.svg) center center no-repeat;
+  background-size: cover;
+}
+
+.title-search {
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  width: 100% !important;
+  font-size: 21px !important;
+}
+
+.form-dados-pessoais .photo {
+  width: 165px !important; 
 }
