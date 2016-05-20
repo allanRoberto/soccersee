@@ -2,7 +2,6 @@
 /*
   Template Name: Page users
  */
-
  $info_user = get_user_meta( $_GET['user_id'] );
 ?>
 

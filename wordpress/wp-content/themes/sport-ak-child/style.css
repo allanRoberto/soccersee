@@ -3517,3 +3517,7 @@ iframe {
 .form-dados-pessoais .photo {
   width: 165px !important; 
 }
+
+.single-post .entry-extra {
+  display: none;
+}

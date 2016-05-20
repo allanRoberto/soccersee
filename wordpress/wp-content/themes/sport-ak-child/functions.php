@@ -543,26 +543,11 @@ add_action( 'wp_ajax_nopriv_search_users', 'search_users_ajax' );
 
 function search_users_ajax() {
 
+	global $wpdb;
+
 	$user_name = $_REQUEST['name_user']; 
 	$position_user = $_REQUEST['position_user'];
 	$user_nationality = $_REQUEST['user-nationality'];
-
-
-	if($position_user != '') {
-		$position_user_array = 
-					array(
-			    		'key'     => 'user-first-position',
-			    		'value'   => $position_user,
-			    		'compare' => '='    
-			    	);
-			    	array(
-			    		'key'     => 'user-second-position',
-			    		'value'   => $position_user,
-			    		'compare' => '='    
-			    	);
-	}else {
-		$position_user_array = '';
-	}
 
 	if($user_nationality != '') {
 		$position_user_array = 
@@ -578,32 +563,82 @@ function search_users_ajax() {
 
 	$args = array(
 			'role' => 'customer',
+			'meta_key' => 'pw_user_status', 
+            'meta_value' => 'approved',
 			'search' => '*'.esc_attr( $user_name ).'*',
-    		'meta_query' => 
-    		array(
-		   		'relation' => 'OR',
-			    $position_user_array,
-			    ), 
 			'fields' => 'all',
 			);
 			
 
 	$user_query = new WP_User_Query($args);
 
-	$users = $user_query->get_results();
+	$users= $user_query->get_results();
+
 
 	if(!empty($users)) {
-		
-		$total_users = $user_query->get_total();
-
-		$title_text = "Pesquisa realizada ".$total_users." resultado(s) encontrado(s)";
-
+		$user_ids = array();
 		foreach ($users as $key => $user) { 
-			$user_meta[$key]['id'] = $user->ID;
-			$user_meta[$key]['first_name'] = $user->first_name." ".$user->last_name;
-			$user_meta[$key]['position_user'] = get_user_meta($user->ID, 'user-first-position', true);
-			$user_meta[$key]['avatar_user'] = site_url('wp-content'.get_user_meta($user->ID, 'user_avatar', true));
-			$user_meta[$key]['link_user'] = get_permalink(1139).'?user_id='.$user->ID;
+			array_push($user_ids, $user->ID);
+		}
+
+		if($position_user != '') {
+			$args = array(
+					'include' => $user_ids, 
+					'meta_query' => array(
+					'relation' => 'OR',
+						array(
+				    		'key'     => 'user-first-position',
+				    		'value'   => $position_user,
+				    		'compare' => '='    
+				    	),
+			    		array(
+				    		'key'     => 'user-second-position',
+				    		'value'   => $position_user,
+				    		'compare' => '='    
+				    	),
+				    	array(
+				    		'key'     => 'user-third-position',
+				    		'value'   => $position_user,
+				    		'compare' => '='    
+				    	)
+				    )
+				);
+
+			$user_query = new WP_User_Query($args);
+
+			$users= $user_query->get_results();
+
+				if(!empty($users)) {
+					$total_users = $user_query->get_total();
+					$title_text = "Pesquisa realizada ".$total_users." resultado(s) encontrado(s)";
+					
+					foreach ($users as $key => $user) {
+
+					$user_meta[$key]['id'] = $user->ID;
+					$user_meta[$key]['first_name'] = $user->first_name." ".$user->last_name;
+					$user_meta[$key]['position_user'] = get_user_meta($user->ID, 'user-first-position', true);
+					$user_meta[$key]['avatar_user'] = site_url('wp-content'.get_user_meta($user->ID, 'user_avatar', true));
+					$user_meta[$key]['link_user'] = get_permalink(1139).'?user_id='.$user->ID;
+					
+					}
+				}else {
+					$title_text = "Nenhum jogador encontrado";
+				}
+		    	
+		} 
+		else {
+
+			$total_users = $user_query->get_total();
+			$title_text = "Pesquisa realizada ".$total_users." resultado(s) encontrado(s)";
+		
+			foreach ($users as $key => $user) {
+
+				$user_meta[$key]['id'] = $user->ID;
+				$user_meta[$key]['first_name'] = $user->first_name." ".$user->last_name;
+				$user_meta[$key]['position_user'] = get_user_meta($user->ID, 'user-first-position', true);
+				$user_meta[$key]['avatar_user'] = site_url('wp-content'.get_user_meta($user->ID, 'user_avatar', true));
+				$user_meta[$key]['link_user'] = get_permalink(1139).'?user_id='.$user->ID;
+			}
 		}
 
 	} else {
@@ -613,7 +648,8 @@ function search_users_ajax() {
 
 	$result = array(
 			'title_text' => $title_text, 
-			'users' => $user_meta
+			'users' => $user_meta,
+			'data' => $data
 			);
 
 	echo json_encode($result);

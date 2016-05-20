@@ -86,7 +86,6 @@ define('WPLANG', '');
 define('WP_MEMORY_LIMIT', '64M');
 
 
-
 /**
  * For developers: WordPress debugging mode.
  *

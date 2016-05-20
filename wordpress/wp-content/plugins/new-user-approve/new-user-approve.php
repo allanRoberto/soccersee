@@ -289,7 +289,7 @@ class pw_new_user_approve {
 				break;
 			case 'denied':
 				$denied_message = $this->default_authentication_message( 'denied' );
-				$message = new WP_Error( 'denied_access', $denied_message );
+				$message = $userdata;
 				break;
 			case 'approved':
 				$message = $userdata;
