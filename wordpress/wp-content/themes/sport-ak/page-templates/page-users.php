@@ -18,11 +18,13 @@
                                 <div class="wpb_wrapper">
                                     <div class="vc_row wpb_row vc_inner vc_row-fluid container vc_custom_1444660966900">
                                         <div class="row">
-                                            <div class="wpb_column vc_column_container col-sm-offset-2 col-sm-4">
+                                            <div class="wpb_column vc_column_container col-sm-offset-2 col-sm-3">
                                                 <div class="wpb_wrapper">
                                                     <div class="field ">
                                                         <div class="entry-thumbnail">
-                                                                <div class="image " style="background-image: url(<?php echo $info_user['user_avatar'][0]; ?>); height: 484px;" data-width="470" data-height="484">
+                                                                <div class="image col-jjj" style="
+                                                                background-image: url('<?php echo content_url($info_user['user_avatar'][0]); ?>');
+                                                                 height: 170px; width: 170px;" data-width="470" data-height="484">
                                                                 </div>
                                                         </div>
                                                     </div>
@@ -37,7 +39,7 @@
                                                         <div class="panel-content">
                                                             <div class="field ">
                                                                 <span class="player-position">
-                                                                    <label>Apelido</label><?php echo $info_user['display_name'][0]; ?>
+                                                                    <label>Apelido</label><?php echo $info_user['apelido'][0]; ?>
                                                                 </span>
                                                             </div>
                                                             <div class="field ">
@@ -53,6 +55,11 @@
                                                             <div class="field ">
                                                                 <span class="player-position">
                                                                     <label>Escolaridade</label><?php echo $info_user['user-schooling'][0]; ?>
+                                                                </span>
+                                                            </div>
+                                                             <div class="field ">
+                                                                <span class="player-position">
+                                                                    <label>Nacionalidade</label><?php echo $info_user['user-nationality'][0]; ?>
                                                                 </span>
                                                             </div>
                                                             <div class="field ">
@@ -104,15 +111,15 @@
             <div class="entry-data">
                 <div class="entry-header">
                     <h2 class="text-player">Fotos</h2>
-                </div>
-                <div class="entry-content">
-                    <p class="text-center"><?php echo $info_user['habilidades'][0]; ?></p>
+                    <div class="container-images">
+                        <?php echo do_shortcode('[sui_table_images id="'.$_GET['user_id'].'"]');?>
+                    </div>
                 </div>
                 <div class="entry-header">
                     <h2 class="text-player">Vídeos</h2>
                 </div>
                 <div class="entry-content">
-                    <p class="text-center"><?php echo $info_user['habilidades'][0]; ?></p>
+                    <?php echo do_shortcode('[sui_table_videos id="'.$_GET['user_id'].'"]');?>
                 </div>
                 <div class="entry-header">
                     <h2 class="text-player">Habilidades</h2>

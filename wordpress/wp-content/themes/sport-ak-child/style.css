@@ -3521,3 +3521,8 @@ iframe {
 .single-post .entry-extra {
   display: none;
 }
+
+
+.btn-pagamento .count {
+  display:none;
+}
