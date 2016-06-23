@@ -145,8 +145,6 @@
                                     else {
                                         $content = '<h1 class="title-search">Nenhum jogador encontrado</h1>';
                                     }
-
-                                    $content .= ob_get_contents(); 
     
                                 } 
                                 else {
