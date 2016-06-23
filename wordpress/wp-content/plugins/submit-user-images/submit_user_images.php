@@ -82,13 +82,13 @@ add_shortcode('sui_form', 'sui_form_shortcode');
 add_shortcode('sui_form_video', 'sui_form_shortcode_video');
 add_shortcode('sui_table_images', 'sui_table_shortcode' );
 add_shortcode('sui_table_videos', 'sui_table_video_shortcode' );
-function sui_table_shortcode() {
+function sui_table_shortcode($atts) {
   $atts = shortcode_atts(
     array(
       'id' => '',
     ), $atts );
     $args = array(
-      'author' => $id,
+      'author' => $atts['id'],
       'post_type' => 'user_images',
       'post_status' => 'publish'   
     );
@@ -119,19 +119,20 @@ function sui_table_shortcode() {
      
     return $out;
 }
-function sui_table_video_shortcode() {
+function sui_table_video_shortcode($atts) {
   $atts = shortcode_atts(
     array(
       'id' => '',
     ), $atts );
     $args = array(
-      'author' => $id,
+      'author' => $atts['id'],
       'post_type' => 'user_videos',
       'post_status' => 'publish'   
     );
      
     $user_videos = new WP_Query($args);
-   
+
+
     if(!$user_videos->post_count) return false;
      
     $out = '';
